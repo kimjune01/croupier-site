@@ -1,0 +1,51 @@
+# Croupier
+
+> Ad attribution that can't be hijacked.
+
+Croupier is a blind relay for cryptographic coupon books. It provides verifiable conversion tracking using signed tokens instead of cookies or UTM parameters. The advertiser signs a coupon, distributes it through a publisher's channel, and the customer carries it to conversion. The advertiser verifies their own signature. No platform touches the evidence.
+
+## How it works
+
+1. **Issue**: Advertiser creates a batch of signed coupons (Ed25519).
+2. **Blind**: Coupons are blinded so the relay can't read them.
+3. **Pull**: Publisher fetches the blinded coupon book from the relay.
+4. **Embed**: Publisher embeds coupon codes in ad tags.
+5. **Carry**: Customer clicks an ad. The coupon rides along to conversion.
+6. **Verify**: Advertiser checks their own signature. Real conversion confirmed.
+
+The relay is a pipe, not a player. It never sees coupon contents.
+
+## Why it exists
+
+Cookie-based attribution is broken:
+- Browser extensions (Honey, Capital One Shopping, Rakuten) overwrite affiliate cookies at checkout, stealing attribution credit.
+- Ad platforms self-report conversions, inflating numbers by 30-50%.
+- Ad verification companies (DoubleVerify, IAS) missed 21-77% of bot traffic.
+- Google lost two antitrust cases over ad monopoly practices.
+- Forbes ran a secret MFA subdomain. $770M/quarter goes to made-for-advertising sites.
+
+Cryptographic coupons solve this because the advertiser holds the private key. No middleman can forge, modify, or steal attribution.
+
+## Technical foundation
+
+- Blind signatures (David Chaum, 1983)
+- Privacy Pass (IETF RFC 9578) — used by Apple Private Access Tokens and Brave
+- Ed25519 signatures
+- The entire relay is ~250 lines of TypeScript
+
+## Links
+
+- Website: https://croupier.click
+- Relay source: https://github.com/kimjune01/croupier
+- Coupon library: https://github.com/kimjune01/cryptographic-coupons
+- Author: June Kim (https://june.kim)
+
+## Pricing
+
+- Self-Hosted: Free (MIT license)
+- Managed: $99/mo (hosted relay, up to 50K verifications)
+- Scale: $499/mo (unlimited verifications, SLA)
+
+## Blog
+
+The Croupier blog covers ad attribution fraud, cookie hijacking, platform self-reporting problems, and the case for cryptographic attribution. Topics include comparisons with UTM tracking, AppsFlyer, DoubleVerify, Google Privacy Sandbox, Northbeam, and Triple Whale.
