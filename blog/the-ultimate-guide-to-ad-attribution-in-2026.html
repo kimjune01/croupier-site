@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Ultimate Guide to Ad Attribution in 2026 — Croupier</title>
+<meta name="description" content="A comprehensive overview of attribution models, what broke in 2026, and where the industry is heading." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://croupier.click/blog/the-ultimate-guide-to-ad-attribution-in-2026" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="The Ultimate Guide to Ad Attribution in 2026 — Croupier" />
+<meta property="og:description" content="A comprehensive overview of attribution models, what broke in 2026, and where the industry is heading." />
+<meta property="og:url" content="https://croupier.click/blog/the-ultimate-guide-to-ad-attribution-in-2026" />
+<meta property="og:site_name" content="Croupier" />
+<meta property="og:image" content="https://croupier.click/og-card.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="The Ultimate Guide to Ad Attribution in 2026 — Croupier" />
+<meta name="twitter:description" content="A comprehensive overview of attribution models, what broke in 2026, and where the industry is heading." />
+<meta name="twitter:image" content="https://croupier.click/og-card.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9824;</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/index-DdRUP43R.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "The Ultimate Guide to Ad Attribution in 2026",
+  "description": "A comprehensive overview of attribution models, what broke in 2026, and where the industry is heading.",
+  "datePublished": "2026-02-28",
+  "dateModified": "2026-02-28",
+  "url": "https://croupier.click/blog/the-ultimate-guide-to-ad-attribution-in-2026",
+  "mainEntityOfPage": "https://croupier.click/blog/the-ultimate-guide-to-ad-attribution-in-2026",
+  "image": "https://croupier.click/og-card.png",
+  "author": {
+    "@type": "Person",
+    "name": "June Kim",
+    "url": "https://june.kim"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Croupier",
+    "url": "https://croupier.click"
+  }
+}
+</script>
+</head>
+<body>
+<nav class="sticky top-0 z-50 bg-bg/80 backdrop-blur-md border-b border-card-border">
+<div class="max-w-3xl mx-auto px-6 h-16 flex items-center gap-4">
+<a href="/blog" class="text-text-muted hover:text-text transition-colors text-sm">&#8592; Blog</a>
+<a href="/" class="font-display text-lg font-bold italic flex items-center gap-2"><span class="text-accent-gold">&#9824;</span> Croupier</a>
+</div>
+</nav>
+<article class="max-w-3xl mx-auto px-6 py-12">
+<div class="mb-8"><time class="text-text-muted/60 font-mono text-sm">February 28, 2026</time></div>
+<div class="prose">
+<h1>The Ultimate Guide to Ad Attribution in 2026</h1>
+<p><em>February 2026 | Croupier Blog</em></p>
+<p>Ad attribution is the process of deciding which marketing touchpoints get credit for a conversion. A customer sees an ad on Tuesday, clicks a different ad on Thursday, and buys on Friday — which channel caused the sale? Attribution is the answer to that question, and in 2026 it is harder to answer honestly than it has ever been.</p>
+<p>This guide covers the main attribution models, what has broken down in the current environment, and where advertiser-side cryptographic attribution is heading.</p>
+<hr>
+<h2>What Attribution Is</h2>
+<p>Attribution connects ad spend to outcomes. When a conversion happens — a purchase, a signup, a download — some system records which ad exposure gets credit. That credit determines budget allocation: channels that show high attributed conversions get more money; channels that show low numbers get cut.</p>
+<p>The problem is that &quot;which ad exposure gets credit&quot; is not a neutral technical question. It is an economic one. The entity doing the measuring has an interest in the result.</p>
+<hr>
+<h2>The Main Attribution Models</h2>
+<h3>Last-Click Attribution</h3>
+<p>The final touchpoint before conversion receives full credit. Simple and predictable. Also trivially exploitable: anyone who can write a cookie or overwrite a URL parameter at the end of the funnel claims the conversion. The December 2024 Honey scandal illustrated this at scale — PayPal&#39;s browser extension overwrote affiliate cookies at checkout, transferring attribution from publishers who drove the sale to Honey. Last-click attribution&#39;s weakness is structural, not incidental.</p>
+<h3>First-Click Attribution</h3>
+<p>The first touchpoint receives full credit. Useful for measuring top-of-funnel channel performance and brand awareness. Ignores everything that happened between discovery and purchase, which can be substantial.</p>
+<h3>Linear Attribution</h3>
+<p>Credit is divided equally across all touchpoints in the conversion path. More complete than first- or last-click, but the equal-weighting assumption is rarely grounded in evidence about which touchpoints actually moved the customer.</p>
+<h3>Time-Decay Attribution</h3>
+<p>Touchpoints closer to conversion receive more credit, with earlier exposures receiving less. The decay curve is a parameter that someone has to set — usually the platform selling the impressions. A steeper curve favors the bottom of the funnel, which typically means the platform&#39;s own retargeting inventory.</p>
+<h3>Data-Driven and Multi-Touch Attribution</h3>
+<p>Machine learning assigns fractional credit across touchpoints based on observed patterns in conversion paths. More sophisticated than rule-based models, and better at capturing multi-touch reality. The practical limitation: the model is opaque, trained on the platform&#39;s own data, and cannot be independently audited by the advertiser.</p>
+<h3>Marketing Mix Modeling</h3>
+<p>MMM uses statistical regression across aggregate data — sales, spend, seasonality, economic indicators — to estimate channel contributions. It does not depend on cookies or individual tracking, which makes it more durable as tracking degrades. It also requires months of data to produce stable estimates, and its outputs are directional rather than transactional.</p>
+<hr>
+<h2>What Broke in 2026</h2>
+<h3>Platform Self-Reporting</h3>
+<p>Every major ad platform reports its own performance. The same entity selling you inventory is measuring whether that inventory worked. Independent analysis has found this inflates reported conversions by 30 to 50 percent compared to advertiser-side measurements. Google was found guilty of monopolizing the ad exchange market in antitrust proceedings. The structural conflict of interest is not a theoretical concern.</p>
+<h3>Cookie Deprecation and Extension Hijacking</h3>
+<p>Third-party cookies are being deprecated, and cross-site tracking is degrading across browsers. This would be a tractable problem if first-party measurement were reliable. It is not, because browser extensions can still intervene. The Honey extension&#39;s last-write-wins behavior — overwriting affiliate cookies at checkout — exposed how fragile cookie-based attribution is even when it is first-party. Any script with access to the page can overwrite a cookie or a UTM parameter.</p>
+<h3>Bot Traffic and Verification Failure</h3>
+<p>Ad verification vendors exist specifically to detect invalid traffic. An Adalytics analysis found that DoubleVerify and Integral Ad Science missed 21 to 77 percent of bot traffic in audited campaigns. BADBOX, Genisys, and Vo1d infected millions of connected devices to generate fraudulent ad impressions at scale. The verification layer does not reliably filter what it is paid to filter.</p>
+<h3>Made-for-Advertising Sites</h3>
+<p>Forbes operated a secret made-for-advertising subdomain for years. Approximately $770 million per quarter flows to MFA sites — low-quality inventory that passes brand-safety filters while delivering no real audience value. AI-generated content farms have expanded the supply. Standard brand safety tools categorize content, but MFA sites are often correctly categorized while still delivering near-zero performance.</p>
+<hr>
+<h2>How to Evaluate an Attribution Method</h2>
+<p>When assessing any attribution approach, the relevant questions are:</p>
+<p><strong>Who controls the measurement?</strong> If the entity selling you inventory is also measuring it, you have a conflict of interest by design. Advertiser-side measurement removes this.</p>
+<p><strong>Can the reported data be forged or inflated?</strong> Cookie-based attribution can be overwritten. Platform-reported conversions can be inflated by counting the same conversion multiple times across windows. Mathematical verification makes forgery impossible.</p>
+<p><strong>Does it survive the current tracking environment?</strong> Methods that depend on third-party cookies will degrade. Methods that depend on browser-side storage are vulnerable to extension interference. Methods that pass cryptographic tokens through the conversion URL are environment-agnostic.</p>
+<p><strong>Can you audit it independently?</strong> If the attribution logic is a black box, you are trusting the vendor. If the logic is a signature check against your own private key, you can verify every individual conversion yourself.</p>
+<hr>
+<h2>Where the Industry Is Heading: Advertiser-Side Attribution</h2>
+<p>The direction that addresses the structural problems above is cryptographic attribution, where the advertiser holds the measurement key.</p>
+<p>The basic mechanism, rooted in David Chaum&#39;s 1983 blind signature work and formalized in IETF Privacy Pass (RFC 9578), works as follows:</p>
+<ol>
+<li>The advertiser generates a signing key pair. The private key stays with the advertiser.</li>
+<li>The advertiser signs a batch of tokens — one per intended ad exposure — producing a coupon book.</li>
+<li>Publishers receive coupons and embed one per impression, as a URL parameter. The format is the same as a UTM tag.</li>
+<li>The customer&#39;s click carries the token through to the conversion endpoint.</li>
+<li>At conversion, the advertiser verifies the signature against their own public key. Valid signature: attributed conversion. Invalid or missing: discarded.</li>
+</ol>
+<p>No third party can forge a coupon — they would need the advertiser&#39;s private key. No extension can overwrite a cryptographic signature after it has been issued. The platform does not report the conversion; the advertiser counts their own verified redemptions.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Cookie-Based</th>
+<th>Platform-Reported</th>
+<th>Cryptographic</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Controlled by</td>
+<td>Browser / extension</td>
+<td>Ad platform</td>
+<td>Advertiser</td>
+</tr>
+<tr>
+<td>Forgeable</td>
+<td>Yes</td>
+<td>Yes (self-report)</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Independently verifiable</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Survives extension interference</td>
+<td>No</td>
+<td>N/A</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Privacy model</td>
+<td>Cross-site tracking</td>
+<td>Platform tracking</td>
+<td>Blind signatures (no user identifier)</td>
+</tr>
+</tbody></table>
+<p>Because the tokens are blind-signed, the relay distributing them cannot link a token to a specific user. The anonymity set is the batch. This design is compatible with privacy regulations in a way that pixel-based tracking is not.</p>
+<p>The practical output for advertisers is a publisher leaderboard grounded in verified conversions. A niche publisher with a high verified conversion rate becomes visible. An MFA site with near-zero verified conversions is identifiable regardless of what the platform reports for that placement.</p>
+<hr>
+<h2>Getting Started</h2>
+<p>The migration does not require abandoning existing tooling immediately.</p>
+<p>Run cryptographic coupons in parallel with your current attribution stack for one channel. Compare coupon-verified conversions to platform-reported conversions for the same period. The gap is a direct measurement of how much your current reporting is inflated or otherwise unreliable.</p>
+<p>From there, expand to additional channels. The coupon-verified numbers become the ground truth against which you calibrate model-based estimates and negotiate publisher contracts.</p>
+<p>The relay infrastructure for this is open source. Croupier handles coupon deposit and distribution without reading the coupons themselves — a blind relay by design.</p>
+<hr>
+<p><em>Croupier is a blind relay for cryptographic coupon books. <a href="https://github.com/kimjune01/croupier">Learn more</a> or <a href="https://croupier.ad">request early access</a>.</em></p>
+
+</div>
+<div class="border-t border-card-border mt-12 pt-8">
+<a href="/blog" class="text-accent-green hover:text-accent-green-hover transition-colors text-sm">&#8592; Back to all posts</a>
+</div>
+</article>
+</body>
+</html>

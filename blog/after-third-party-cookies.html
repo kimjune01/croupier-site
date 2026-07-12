@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>After Third-Party Cookies: Attribution Without Tracking — Croupier</title>
+<meta name="description" content="Every cookie replacement recreates the same problems. Bearer attribution never depended on cookies in the first place." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://croupier.click/blog/after-third-party-cookies" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="After Third-Party Cookies: Attribution Without Tracking — Croupier" />
+<meta property="og:description" content="Every cookie replacement recreates the same problems. Bearer attribution never depended on cookies in the first place." />
+<meta property="og:url" content="https://croupier.click/blog/after-third-party-cookies" />
+<meta property="og:site_name" content="Croupier" />
+<meta property="og:image" content="https://croupier.click/og-card.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="After Third-Party Cookies: Attribution Without Tracking — Croupier" />
+<meta name="twitter:description" content="Every cookie replacement recreates the same problems. Bearer attribution never depended on cookies in the first place." />
+<meta name="twitter:image" content="https://croupier.click/og-card.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9824;</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/index-DdRUP43R.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "After Third-Party Cookies: Attribution Without Tracking",
+  "description": "Every cookie replacement recreates the same problems. Bearer attribution never depended on cookies in the first place.",
+  "datePublished": "2026-03-09",
+  "dateModified": "2026-03-09",
+  "url": "https://croupier.click/blog/after-third-party-cookies",
+  "mainEntityOfPage": "https://croupier.click/blog/after-third-party-cookies",
+  "image": "https://croupier.click/og-card.png",
+  "author": {
+    "@type": "Person",
+    "name": "June Kim",
+    "url": "https://june.kim"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Croupier",
+    "url": "https://croupier.click"
+  }
+}
+</script>
+</head>
+<body>
+<nav class="sticky top-0 z-50 bg-bg/80 backdrop-blur-md border-b border-card-border">
+<div class="max-w-3xl mx-auto px-6 h-16 flex items-center gap-4">
+<a href="/blog" class="text-text-muted hover:text-text transition-colors text-sm">&#8592; Blog</a>
+<a href="/" class="font-display text-lg font-bold italic flex items-center gap-2"><span class="text-accent-gold">&#9824;</span> Croupier</a>
+</div>
+</nav>
+<article class="max-w-3xl mx-auto px-6 py-12">
+<div class="mb-8"><time class="text-text-muted/60 font-mono text-sm">March 9, 2026</time></div>
+<div class="prose">
+<h1>After Third-Party Cookies: Attribution Without Tracking</h1>
+<p><em>March 2026 | Croupier Blog</em></p>
+<p>Google delayed third-party cookie deprecation in Chrome four times before settling on a prompt-based opt-out model in 2025. Safari and Firefox blocked them years ago. The industry has spent half a decade preparing for a world without third-party cookies, and most of the proposed replacements recreate the same problems in new packaging.</p>
+<h2>What&#39;s Actually Changing</h2>
+<p>Third-party cookies let ad platforms track users across websites. Visit a shoe store, see shoe ads on a news site. The cookie connects the two visits.</p>
+<p>Browsers are removing this capability because users didn&#39;t consent to cross-site tracking and regulators (GDPR, CCPA) increasingly require consent that most sites can&#39;t meaningfully obtain.</p>
+<p>But the advertiser&#39;s real need was never to track users across the web. It was to know which ad channels drove conversions. Tracking was the implementation, not the goal. Attribution was the goal.</p>
+<h2>The Replacement Landscape</h2>
+<p>The industry&#39;s responses fall into a few categories:</p>
+<p><strong>Cohort-based approaches (Topics API, formerly FLoC).</strong> Group users into interest categories. The browser reports &quot;this user is interested in running shoes&quot; rather than a unique identifier. Advertisers target cohorts instead of individuals. But cohorts still require the browser to profile the user. The privacy gain is marginal — the surveillance moves from individual to group-level.</p>
+<p><strong>Server-side tracking.</strong> Move the tracking pixel from the browser to the server. Harder for ad blockers to stop, but the same architecture: the platform reports its own numbers. Server-side tracking solves a technical problem (browser restrictions) without solving the trust problem (self-reported metrics).</p>
+<p><strong>Data clean rooms.</strong> Advertisers and publishers upload first-party data to a neutral environment for matching. This works for large brands with significant first-party datasets but requires sharing customer data with a third party, which is what privacy regulation was trying to prevent.</p>
+<p><strong>Probabilistic fingerprinting.</strong> Infer identity from browser characteristics, IP addresses, and behavioral signals. Explicitly banned by most browser vendors and regulators. A non-starter for any compliant operation.</p>
+<p><strong>Privacy Sandbox (Attribution Reporting API).</strong> Google&#39;s browser-mediated attribution. The browser itself becomes the attribution engine, reporting aggregate conversions with noise added for privacy. Better than cookies, but the browser vendor controls the measurement infrastructure. If that vendor is also the largest ad platform, the conflict of interest shifts rather than disappears.</p>
+<h2>What&#39;s Missing</h2>
+<p>Every replacement above keeps the same directional flow: information goes from the user&#39;s browser to the ad platform, and the platform reports results back to the advertiser.</p>
+<p>The advertiser is still a passenger. They receive reports. They don&#39;t generate proof.</p>
+<p>The alternative is to flip the direction. Instead of the platform reporting &quot;we showed your ad and it converted,&quot; the advertiser issues a signed token that travels with the ad and comes back at conversion. The advertiser verifies their own signature. No platform report needed.</p>
+<h2>Bearer Attribution</h2>
+<p>The concept is old. Coca-Cola used numbered coupons in 1887. The customer carried the proof from the ad to the point of sale. The advertiser counted redemptions per publication.</p>
+<p>Cryptographic coupons are the digital version. The advertiser signs a batch of tokens. The publisher embeds one per impression. The customer&#39;s device carries it. At conversion, the advertiser checks the signature. Publisher A converts at 8%. Publisher B at 0.2%.</p>
+<p>No cookie required. No cross-site tracking. No browser API dependency. The token is a signed blob in a URL parameter — it works in any browser, any app, any environment that can pass a query string.</p>
+<p>This is why it survives cookie deprecation: it never depended on cookies in the first place.</p>
+<h2>Privacy Without Compromise</h2>
+<p>The privacy properties of cryptographic coupons are stronger than any cookie replacement:</p>
+<ul>
+<li><strong>No user tracking.</strong> The token identifies the channel, not the person. The advertiser learns &quot;Publisher A converts at 8%&quot; but can&#39;t identify which individual redeemed which token.</li>
+<li><strong>No browser profiling.</strong> No cohorts, no fingerprinting, no interest categories. The browser doesn&#39;t need to know anything about the user&#39;s ad preferences.</li>
+<li><strong>No data sharing.</strong> The advertiser and publisher never exchange customer data. The coupon is the join between impression and conversion.</li>
+<li><strong>Blind relay.</strong> The infrastructure that passes coupon books between parties never reads the contents. <a href="https://github.com/kimjune01/croupier">Croupier</a> is built this way — it moves sealed envelopes without opening them.</li>
+</ul>
+<p>The math enforces the privacy. Not a policy, not a terms-of-service clause, not a browser setting that can be changed in the next update.</p>
+<h2>What To Do Now</h2>
+<p>If you&#39;re planning for a post-cookie world:</p>
+<ol>
+<li><strong>Stop rebuilding the cookie.</strong> Solutions that replicate cross-site tracking with different technology will face the same regulatory and browser resistance.</li>
+<li><strong>Invest in first-party measurement.</strong> The advertiser who controls their own attribution is not affected by browser changes.</li>
+<li><strong>Test cryptographic attribution.</strong> Run a parallel campaign with signed tokens alongside your existing setup. Compare the results.</li>
+</ol>
+<p>The cookie is going away because it was a surveillance tool repurposed for attribution. The replacement should be an attribution tool that doesn&#39;t require surveillance.</p>
+<hr>
+<p><em>Croupier is a blind relay for cryptographic coupon books. <a href="https://github.com/kimjune01/croupier">Learn more</a> or <a href="https://croupier.ad">request early access</a>.</em></p>
+
+</div>
+<div class="border-t border-card-border mt-12 pt-8">
+<a href="/blog" class="text-accent-green hover:text-accent-green-hover transition-colors text-sm">&#8592; Back to all posts</a>
+</div>
+</article>
+</body>
+</html>

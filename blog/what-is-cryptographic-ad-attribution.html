@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>What Is Cryptographic Ad Attribution? — Croupier</title>
+<meta name="description" content="Signed tokens instead of cookies. The advertiser issues, the customer carries, the advertiser verifies. No platform dashboard needed." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://croupier.click/blog/what-is-cryptographic-ad-attribution" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="What Is Cryptographic Ad Attribution? — Croupier" />
+<meta property="og:description" content="Signed tokens instead of cookies. The advertiser issues, the customer carries, the advertiser verifies. No platform dashboard needed." />
+<meta property="og:url" content="https://croupier.click/blog/what-is-cryptographic-ad-attribution" />
+<meta property="og:site_name" content="Croupier" />
+<meta property="og:image" content="https://croupier.click/og-card.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="What Is Cryptographic Ad Attribution? — Croupier" />
+<meta name="twitter:description" content="Signed tokens instead of cookies. The advertiser issues, the customer carries, the advertiser verifies. No platform dashboard needed." />
+<meta name="twitter:image" content="https://croupier.click/og-card.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9824;</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/index-DdRUP43R.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "What Is Cryptographic Ad Attribution?",
+  "description": "Signed tokens instead of cookies. The advertiser issues, the customer carries, the advertiser verifies. No platform dashboard needed.",
+  "datePublished": "2026-02-12",
+  "dateModified": "2026-02-12",
+  "url": "https://croupier.click/blog/what-is-cryptographic-ad-attribution",
+  "mainEntityOfPage": "https://croupier.click/blog/what-is-cryptographic-ad-attribution",
+  "image": "https://croupier.click/og-card.png",
+  "author": {
+    "@type": "Person",
+    "name": "June Kim",
+    "url": "https://june.kim"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Croupier",
+    "url": "https://croupier.click"
+  }
+}
+</script>
+</head>
+<body>
+<nav class="sticky top-0 z-50 bg-bg/80 backdrop-blur-md border-b border-card-border">
+<div class="max-w-3xl mx-auto px-6 h-16 flex items-center gap-4">
+<a href="/blog" class="text-text-muted hover:text-text transition-colors text-sm">&#8592; Blog</a>
+<a href="/" class="font-display text-lg font-bold italic flex items-center gap-2"><span class="text-accent-gold">&#9824;</span> Croupier</a>
+</div>
+</nav>
+<article class="max-w-3xl mx-auto px-6 py-12">
+<div class="mb-8"><time class="text-text-muted/60 font-mono text-sm">February 12, 2026</time></div>
+<div class="prose">
+<h1>What Is Cryptographic Ad Attribution?</h1>
+<p><em>March 2026 | Croupier Blog</em></p>
+<p>Cryptographic ad attribution is a method of measuring advertising performance using signed tokens instead of cookies or tracking pixels. The advertiser issues the tokens, the publisher distributes them, and the customer carries them to the point of conversion. No intermediary reports the results — the advertiser verifies their own signatures.</p>
+<h2>The Problem It Solves</h2>
+<p>Digital ad attribution has depended on cookies and pixels since the 1990s. The publisher fires a pixel. The platform drops a cookie. At conversion, the advertiser&#39;s tracking code checks for the cookie and credits the channel.</p>
+<p>This model has three structural weaknesses:</p>
+<ol>
+<li><strong>Cookies can be overwritten.</strong> Any browser extension, toolbar, or script with access to the cookie jar can swap the tracking value. The PayPal Honey scandal showed this at scale.</li>
+<li><strong>Pixels can be spoofed.</strong> Bot traffic triggers impression and click pixels at industrial scale. The advertiser pays for events that never involved a human.</li>
+<li><strong>The platform self-reports.</strong> The entity selling impressions is the same entity measuring their effectiveness. There is no independent audit.</li>
+</ol>
+<p>Cryptographic attribution addresses all three by moving the proof of attribution from the platform to the advertiser.</p>
+<h2>How It Works</h2>
+<p>The mechanism borrows from the oldest form of ad attribution: the coupon.</p>
+<p><strong>1. Issue.</strong> The advertiser generates a batch of cryptographically signed tokens — digital coupons. Each token carries the advertiser&#39;s signature but reveals nothing about the customer or the offer value.</p>
+<p><strong>2. Distribute.</strong> The advertiser deposits the coupon book with a relay service. The publisher pulls the book and embeds one token per ad impression. The token rides in a query parameter, the same shape as a UTM tag.</p>
+<p><strong>3. Carry.</strong> The customer&#39;s device carries the token from the ad to the conversion event. No server-side redirect. No cookie. The token is a signed blob attached to the ad click URL.</p>
+<p><strong>4. Verify.</strong> At conversion, the customer&#39;s device presents the token. The advertiser checks their own signature. If it&#39;s valid, the conversion is attributed to the publisher who distributed that coupon book. If not, it&#39;s discarded.</p>
+<p>The advertiser counts how many tokens came back from each publisher. Publisher A: 80 out of 1,000 redeemed (8%). Publisher B: 3 out of 1,000 (0.3%). Those are the advertiser&#39;s numbers, generated from their own cryptographic signatures.</p>
+<h2>The Cryptography</h2>
+<p>Two primitives make this work:</p>
+<p><strong>Public-key signatures.</strong> The advertiser signs each token with their private key. Anyone can verify the signature with the public key, but only the advertiser can create it. A forged token fails verification. This is the same math behind HTTPS certificates — proven, standardized, fast.</p>
+<p><strong>Blind signatures.</strong> Invented by David Chaum in 1983, blind signatures let the advertiser sign a token without seeing its contents. The publisher can verify &quot;this is a real token from a real advertiser&quot; without the advertiser learning which specific token went to which impression. The batch is the anonymity set.</p>
+<p>The IETF standardized this pattern in RFC 9578 (Privacy Pass). Apple uses it for Private Click Measurement in Safari. Brave uses it for anonymous ad confirmations. The building blocks are production-grade.</p>
+<h2>What Each Party Sees</h2>
+<p>Cryptographic attribution enforces selective disclosure by math, not by policy:</p>
+<table>
+<thead>
+<tr>
+<th>Party</th>
+<th>What they see</th>
+<th>What they don&#39;t see</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Advertiser</td>
+<td>Redemption count per publisher, conversion rate</td>
+<td>Which individual redeemed which token</td>
+</tr>
+<tr>
+<td>Publisher</td>
+<td>&quot;This is a real offer from a real advertiser&quot;</td>
+<td>Offer value, customer identity</td>
+</tr>
+<tr>
+<td>Customer</td>
+<td>The discount or offer</td>
+<td>Which publisher they came from (after redemption)</td>
+</tr>
+<tr>
+<td>Relay (Croupier)</td>
+<td>Envelope counts</td>
+<td>Token contents, signatures, conversion data</td>
+</tr>
+</tbody></table>
+<p>No party has the full picture. Privacy is structural, not contractual.</p>
+<h2>How It Compares</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Cookie-based</th>
+<th>Platform pixel</th>
+<th>Cryptographic coupon</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who issues</td>
+<td>Platform</td>
+<td>Platform</td>
+<td>Advertiser</td>
+</tr>
+<tr>
+<td>Who measures</td>
+<td>Platform</td>
+<td>Platform</td>
+<td>Advertiser</td>
+</tr>
+<tr>
+<td>Hijackable</td>
+<td>Yes (cookie overwrite)</td>
+<td>Yes (pixel spoofing)</td>
+<td>No (signature verification)</td>
+</tr>
+<tr>
+<td>Privacy model</td>
+<td>Policy (can be changed)</td>
+<td>Policy (can be changed)</td>
+<td>Math (can&#39;t be changed)</td>
+</tr>
+<tr>
+<td>Requires trust in</td>
+<td>Platform</td>
+<td>Platform</td>
+<td>Cryptography</td>
+</tr>
+</tbody></table>
+<h2>Getting Started</h2>
+<p>The infrastructure for cryptographic attribution is simple:</p>
+<ol>
+<li><strong>Generate a signing key.</strong> Standard RSA or ECDSA key pair.</li>
+<li><strong>Sign a batch of tokens.</strong> A few lines of code using any crypto library.</li>
+<li><strong>Deposit the coupon book.</strong> Push the batch to a relay like <a href="https://github.com/kimjune01/croupier">Croupier</a>.</li>
+<li><strong>Publisher pulls and embeds.</strong> One token per impression, appended as a query parameter.</li>
+<li><strong>Verify at conversion.</strong> Check the signature at your conversion endpoint.</li>
+</ol>
+<p>A proof-of-concept implementation exists in about 250 lines of TypeScript. The relay adds managed hosting, uptime, and integrations on top.</p>
+<p>The math has been production-grade for 40 years. The ad industry just hasn&#39;t used it yet.</p>
+<hr>
+<p><em>Croupier is a blind relay for cryptographic coupon books. <a href="https://github.com/kimjune01/croupier">Learn more</a> or <a href="https://croupier.ad">request early access</a>.</em></p>
+
+</div>
+<div class="border-t border-card-border mt-12 pt-8">
+<a href="/blog" class="text-accent-green hover:text-accent-green-hover transition-colors text-sm">&#8592; Back to all posts</a>
+</div>
+</article>
+</body>
+</html>

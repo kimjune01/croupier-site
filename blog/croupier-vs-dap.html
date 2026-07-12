@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Croupier vs DAP: Bearer Proofs vs Aggregate Privacy — Croupier</title>
+<meta name="description" content="DAP computes aggregate statistics privately. Croupier produces per-conversion proofs. Different questions, different architectures, different tradeoffs." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://croupier.click/blog/croupier-vs-dap" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Croupier vs DAP: Bearer Proofs vs Aggregate Privacy — Croupier" />
+<meta property="og:description" content="DAP computes aggregate statistics privately. Croupier produces per-conversion proofs. Different questions, different architectures, different tradeoffs." />
+<meta property="og:url" content="https://croupier.click/blog/croupier-vs-dap" />
+<meta property="og:site_name" content="Croupier" />
+<meta property="og:image" content="https://croupier.click/og-card.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Croupier vs DAP: Bearer Proofs vs Aggregate Privacy — Croupier" />
+<meta name="twitter:description" content="DAP computes aggregate statistics privately. Croupier produces per-conversion proofs. Different questions, different architectures, different tradeoffs." />
+<meta name="twitter:image" content="https://croupier.click/og-card.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9824;</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/index-DdRUP43R.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Croupier vs DAP: Bearer Proofs vs Aggregate Privacy",
+  "description": "DAP computes aggregate statistics privately. Croupier produces per-conversion proofs. Different questions, different architectures, different tradeoffs.",
+  "datePublished": "2026-03-10",
+  "dateModified": "2026-03-10",
+  "url": "https://croupier.click/blog/croupier-vs-dap",
+  "mainEntityOfPage": "https://croupier.click/blog/croupier-vs-dap",
+  "image": "https://croupier.click/og-card.png",
+  "author": {
+    "@type": "Person",
+    "name": "June Kim",
+    "url": "https://june.kim"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Croupier",
+    "url": "https://croupier.click"
+  }
+}
+</script>
+</head>
+<body>
+<nav class="sticky top-0 z-50 bg-bg/80 backdrop-blur-md border-b border-card-border">
+<div class="max-w-3xl mx-auto px-6 h-16 flex items-center gap-4">
+<a href="/blog" class="text-text-muted hover:text-text transition-colors text-sm">&#8592; Blog</a>
+<a href="/" class="font-display text-lg font-bold italic flex items-center gap-2"><span class="text-accent-gold">&#9824;</span> Croupier</a>
+</div>
+</nav>
+<article class="max-w-3xl mx-auto px-6 py-12">
+<div class="mb-8"><time class="text-text-muted/60 font-mono text-sm">March 10, 2026</time></div>
+<div class="prose">
+<h1>Croupier vs DAP: Bearer Proofs vs Aggregate Privacy</h1>
+<p><em>March 2026 | Croupier Blog</em></p>
+<p>The IETF&#39;s <a href="https://datatracker.ietf.org/doc/draft-ietf-ppm-dap/">Distributed Aggregation Protocol</a> (DAP) is the most serious privacy-preserving measurement standard in development. Co-authored by engineers from Cloudflare and ISRG (the nonprofit behind Let&#39;s Encrypt), with production implementations from both organizations, DAP represents the cryptographic establishment&#39;s answer to &quot;how do you measure things without seeing individual data?&quot;</p>
+<p>Croupier asks a different question. DAP asks &quot;what are the aggregate statistics?&quot; Croupier asks &quot;did this specific channel cause this specific conversion?&quot;</p>
+<p>These are not competing answers to the same question. They are different questions with different architectures, different trust models, and different tradeoffs. Understanding where each one fits matters more than picking a winner.</p>
+<h2>How DAP Works</h2>
+<p>DAP is defined in <a href="https://datatracker.ietf.org/doc/html/draft-ietf-ppm-dap-16"><code>draft-ietf-ppm-dap-16</code></a>, currently on the IETF Standards Track. The cryptographic primitives live in a separate spec: <a href="https://datatracker.ietf.org/doc/draft-irtf-cfrg-vdaf/">Verifiable Distributed Aggregation Functions</a> (VDAF, <code>draft-irtf-cfrg-vdaf-18</code>).</p>
+<p>Four roles:</p>
+<ol>
+<li><strong>Client</strong> — holds an individual measurement. Calls the VDAF <code>shard()</code> function to split it into two shares, encrypts each share to a different Aggregator using HPKE, and uploads the report to the Leader.</li>
+<li><strong>Leader Aggregator</strong> — receives all client reports, decrypts its own share, forwards the Helper&#39;s encrypted share, and runs an interactive verification protocol with the Helper.</li>
+<li><strong>Helper Aggregator</strong> — operated by a <em>different organization</em> than the Leader. Decrypts its own share, participates in verification, computes its own aggregate share independently.</li>
+<li><strong>Collector</strong> — issues a query, receives both Aggregators&#39; aggregate shares, calls <code>unshard()</code> to recover the final statistic. Never sees individual measurements.</li>
+</ol>
+<p>The core guarantee: as long as at least one of the two Aggregators is honest, no individual measurement is ever seen in the clear. The VDAF&#39;s verification step also catches malformed inputs — a malicious client can&#39;t submit garbage that skews the aggregate.</p>
+<p>Two concrete VDAFs ship with the spec. <strong>Prio3</strong> handles sums, means, histograms, and variance using additive secret sharing with zero-knowledge validity proofs. <strong>Poplar1</strong> solves the private heavy-hitters problem — finding frequently occurring strings without revealing any individual string.</p>
+<h2>How Croupier Works</h2>
+<p>Croupier implements a different primitive: <a href="https://en.wikipedia.org/wiki/Blind_signature">blind signatures</a>, standardized in <a href="https://www.rfc-editor.org/rfc/rfc9578.html">Privacy Pass</a> (RFC 9578).</p>
+<p>Three roles:</p>
+<ol>
+<li><strong>Advertiser (Issuer)</strong> — generates a signing key, signs a batch of tokens (coupons), deposits the sealed batch with the relay.</li>
+<li><strong>Publisher (Distributor)</strong> — pulls the coupon book from the relay, embeds one token per ad impression as a URL query parameter.</li>
+<li><strong>Customer (Bearer)</strong> — carries the token from the ad to the conversion event. At conversion, presents the token.</li>
+</ol>
+<p>The advertiser verifies their own signature at the conversion endpoint. Valid signature means the conversion came through the channel that distributed that coupon book. The relay (Croupier) passes sealed envelopes between advertisers and publishers. It never decrypts, never aggregates, never processes the tokens. A <a href="https://github.com/kimjune01/croupier">structural test</a> verifies zero crypto imports exist in the relay&#39;s source code.</p>
+<p>The guarantee: the relay cannot read what it relays (blind signatures), and no party can forge a token without the advertiser&#39;s private key.</p>
+<h2>The Architectural Difference</h2>
+<p>DAP and Croupier solve different halves of the measurement problem.</p>
+<p><strong>DAP computes aggregate statistics privately.</strong> The Collector learns &quot;Campaign A drove approximately 800 conversions across all publishers&quot; but never sees which individual converted or which specific impression caused it. Privacy comes from aggregation plus optional differential privacy noise.</p>
+<p><strong>Croupier produces individual attribution proofs.</strong> The advertiser learns &quot;this specific conversion presented a valid coupon from Publisher A&#39;s batch&quot; but — due to blind signatures — can&#39;t link which specific token in the batch this was, preserving user privacy within the anonymity set of the batch. Privacy comes from unlinkability, not aggregation.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>DAP</th>
+<th>Croupier</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Output</td>
+<td>Aggregate statistic (sum, mean, histogram)</td>
+<td>Per-conversion proof (valid signature or not)</td>
+</tr>
+<tr>
+<td>Privacy mechanism</td>
+<td>Secret sharing + aggregation + optional DP noise</td>
+<td>Blind signatures (unlinkability within batch)</td>
+</tr>
+<tr>
+<td>Trust model</td>
+<td>Honest-minority: at least 1 of 2 Aggregators honest</td>
+<td>Zero-trust on relay: can&#39;t read what it relays</td>
+</tr>
+<tr>
+<td>Attribution logic</td>
+<td>External (browser or MPC must match source → trigger)</td>
+<td>Inherent (token is the join between impression and conversion)</td>
+</tr>
+<tr>
+<td>Accuracy</td>
+<td>Approximate (noise added for DP)</td>
+<td>Exact (valid signature is binary)</td>
+</tr>
+<tr>
+<td>Latency</td>
+<td>Batched (reports must accumulate to <code>min_batch_size</code>)</td>
+<td>Real-time (verify at conversion endpoint)</td>
+</tr>
+<tr>
+<td>Cross-device</td>
+<td>No (DAP alone) / Yes (IPA extension)</td>
+<td>No (token must be carried from click to conversion)</td>
+</tr>
+<tr>
+<td>Infrastructure</td>
+<td>Two independent Aggregator operators + Collector</td>
+<td>One relay (which could be self-hosted)</td>
+</tr>
+</tbody></table>
+<h2>Trust Models Compared</h2>
+<p>DAP&#39;s trust model is <strong>honest-minority</strong>: privacy holds as long as at least one Aggregator executes the protocol honestly. If both Aggregators collude — or are compromised by the same attacker — they can reconstruct individual measurements. This requires two independent organizations to operate the Aggregators, which is both DAP&#39;s strength (cryptographic guarantee) and its operational cost (you need two trustworthy, independent operators).</p>
+<p>ISRG operates <a href="https://github.com/divviup/janus">Janus</a> as one Aggregator. Cloudflare operates <a href="https://github.com/cloudflare/daphne">Daphne</a> as the other. Mozilla runs its own for Firefox deployments. The trust depends on these organizations not colluding.</p>
+<p>Croupier&#39;s trust model is <strong>zero-trust on the relay</strong>. The relay handles HPKE-encrypted coupon books. Blind signatures mean it literally cannot read the tokens it passes. Even a fully compromised relay learns nothing about the coupons&#39; contents. The advertiser doesn&#39;t trust the relay — they trust their own signing key.</p>
+<p>The trust surfaces:</p>
+<table>
+<thead>
+<tr>
+<th>What you trust</th>
+<th>DAP</th>
+<th>Croupier</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Cryptographic primitives</td>
+<td>Secret sharing, ZK proofs, HPKE</td>
+<td>Blind signatures, HPKE</td>
+</tr>
+<tr>
+<td>Operators</td>
+<td>2 independent Aggregators (at least 1 honest)</td>
+<td>None (relay is blind)</td>
+</tr>
+<tr>
+<td>Hardware</td>
+<td>None (pure crypto)</td>
+<td>None (pure crypto)</td>
+</tr>
+<tr>
+<td>Browser vendor</td>
+<td>Depends on deployment (Firefox PPA required browser)</td>
+<td>No (token is a URL parameter)</td>
+</tr>
+<tr>
+<td>Advertiser&#39;s own key</td>
+<td>N/A</td>
+<td>Yes (signing key security)</td>
+</tr>
+</tbody></table>
+<p>Neither system requires trusting a TEE or hardware enclave. Both are pure cryptography. But DAP requires trusting the independence of two organizations, while Croupier requires the advertiser to secure their own private key.</p>
+<h2>Where DAP Is Stronger</h2>
+<p><strong>Aggregate privacy guarantees.</strong> DAP can enforce differential privacy at the aggregation layer — adding calibrated noise so that the aggregate statistic doesn&#39;t reveal whether any single individual&#39;s data was included. Croupier&#39;s per-conversion proofs are exact, which means an advertiser with a very small batch could potentially narrow down who converted. The batch size is the anonymity set, and the advertiser must choose batch sizes large enough to provide meaningful privacy.</p>
+<p><strong>Resistance to Sybil attacks on the Collector.</strong> Because DAP produces only aggregates, a malicious Collector can&#39;t learn individual conversions even with repeated queries (assuming proper DP budgeting). With Croupier, the advertiser sees each redemption individually — privacy for the user depends on the batch anonymity set, not on limiting the Collector&#39;s view.</p>
+<p><strong>Standardization trajectory.</strong> DAP is on the IETF Standards Track with multiple interoperable implementations. It has institutional backing from ISRG, Cloudflare, and Mozilla. The W3C&#39;s <a href="https://www.w3.org/community/patcg/">Private Advertising Technology Community Group</a> (PATCG) is building attribution standards on top of DAP&#39;s aggregation layer.</p>
+<p><strong>Cross-device potential.</strong> The <a href="https://github.com/patcg-individual-drafts/ipa">IPA proposal</a> (Interoperable Private Attribution), built by Mozilla and Meta, extends the MPC model to support cross-device attribution using encrypted match keys. A user who sees an ad on mobile and converts on desktop can be attributed without either Aggregator learning the user&#39;s identity. Croupier&#39;s bearer token model requires the same device to carry the token from impression to conversion.</p>
+<h2>Where Croupier Is Stronger</h2>
+<p><strong>Per-channel attribution without noise.</strong> An advertiser issuing 1,000 coupons to Publisher A and getting 80 back knows the conversion rate is exactly 8.0%, not &quot;approximately 75-85 with ε=1.0 noise.&quot; For small advertisers with limited budgets, the noise floor in DAP-based systems can make the results unusable. DAP&#39;s <code>min_batch_size</code> requirement means you need enough reports before you get any result at all.</p>
+<p><strong>No browser dependency.</strong> DAP deployments to date have required browser integration. Firefox shipped <a href="https://blog.mozilla.org/en/mozilla/privacy-preserving-attribution-for-advertising/">Privacy-Preserving Attribution</a> experimentally in Firefox 128 (July 2024), then removed it. Chrome uses its own TEE-based Attribution Reporting API instead of DAP. Safari has its own system (AdAttributionKit). The browser fragmentation means no DAP-based attribution standard works across all browsers today.</p>
+<p>Croupier&#39;s token is a URL query parameter. It works in any browser, any app, any email client, any podcast player — anywhere that can pass a query string. No browser API required. No vendor adoption dependency.</p>
+<p><strong>Advertiser-controlled measurement.</strong> In DAP, the Collector receives an aggregate result computed by two Aggregators it doesn&#39;t operate. The Collector must trust that the Aggregators executed the protocol correctly. With Croupier, the advertiser verifies their own cryptographic signature at their own conversion endpoint. The measurement is self-sovereign.</p>
+<p><strong>Operational simplicity.</strong> DAP requires two independent organizations to operate Aggregators, maintain uptime, manage HPKE key rotation, and coordinate protocol execution. Croupier requires one relay that can be self-hosted, and the relay&#39;s correctness doesn&#39;t affect privacy because it can&#39;t read the tokens. A compromised or unreliable relay delays delivery but leaks nothing.</p>
+<p><strong>Hijack resistance.</strong> DAP aggregates measurements that are reported by the browser. If the browser&#39;s measurement is wrong — because a cookie was hijacked, a pixel was spoofed, or a bot triggered the event — DAP faithfully aggregates the wrong data. Garbage in, private garbage out.</p>
+<p>Croupier&#39;s token is a signed proof that must be carried from the ad impression to the conversion event. A browser extension can&#39;t forge the advertiser&#39;s signature. A bot can&#39;t redeem a coupon at a real conversion endpoint (because bots don&#39;t make real purchases). The measurement is resistant to the input-level fraud that DAP inherits.</p>
+<h2>The Attribution Gap</h2>
+<p>DAP is a generic aggregation protocol. It computes sums, means, and histograms over secret-shared inputs. It does not do attribution — matching an ad impression to a conversion event. That join has to happen somewhere else.</p>
+<p>In Firefox&#39;s PPA experiment, the browser performed the attribution locally (on-device), then submitted the attributed result to DAP for aggregation. This means the browser decided which impression caused the conversion. If the browser is Chrome, the browser vendor is also the largest ad platform.</p>
+<p>IPA moves the join into the MPC servers — both Aggregators cooperate to match source events (impressions) to trigger events (conversions) using doubly-blinded match keys. This is more flexible but requires &quot;multiple orders of magnitude more&quot; server-side computation than the TEE-based alternative, <a href="https://github.com/patcg-individual-drafts/ipa/issues/59">per Google&#39;s own assessment</a>.</p>
+<p>With Croupier, the token <em>is</em> the join. The coupon travels from the impression to the conversion. No external system needs to match them. No browser needs to decide attribution. No MPC computation needs to correlate events. The physical movement of the token through the ad funnel is the attribution.</p>
+<h2>When to Use Which</h2>
+<p><strong>Use DAP when:</strong></p>
+<ul>
+<li>You need aggregate statistics across large populations (telemetry, surveys, frequency estimation)</li>
+<li>Differential privacy guarantees are required by regulation or policy</li>
+<li>Cross-device attribution is necessary (via IPA extension)</li>
+<li>You&#39;re operating within a browser that supports the protocol</li>
+</ul>
+<p><strong>Use Croupier when:</strong></p>
+<ul>
+<li>You need per-channel conversion rates without noise</li>
+<li>You&#39;re an advertiser who wants to verify attribution with your own keys</li>
+<li>Your ad channels span multiple platforms (web, app, email, podcast, print)</li>
+<li>You need hijack-resistant attribution (affiliate marketing, direct partnerships)</li>
+<li>You want to start measuring immediately without waiting for browser standards</li>
+</ul>
+<p><strong>Use both when:</strong></p>
+<ul>
+<li>You want aggregate campaign-level statistics with formal privacy guarantees (DAP) calibrated against ground-truth per-channel conversion data (Croupier)</li>
+<li>You run some channels through browser-mediated ad networks (DAP/IPA territory) and others through direct publisher partnerships (Croupier territory)</li>
+</ul>
+<h2>The Standards Question</h2>
+<p>DAP has institutional momentum. ISRG, Cloudflare, and Mozilla are investing in it. The IETF process gives it legitimacy. The PATCG is building on it.</p>
+<p>Croupier builds on <a href="https://www.rfc-editor.org/rfc/rfc9578.html">Privacy Pass</a> (RFC 9578) — an IETF standard that&#39;s already ratified, not a draft. Blind signatures have been proven secure since Chaum&#39;s 1983 paper. The token format is standardized. But the application to ad attribution is new, and there is no standards body coordinating its adoption for this use case.</p>
+<p>DAP is a protocol looking for browser adoption. Croupier is a protocol that doesn&#39;t need it. Whether that&#39;s a strength or a limitation depends on whether you believe the browser should mediate ad measurement.</p>
+<p>The <a href="https://github.com/kimjune01/croupier">relay implementation</a> is 250 lines of infrastructure on top of standardized cryptographic primitives. DAP&#39;s implementations — Janus and Daphne — are substantially larger, reflecting the complexity of multi-party computation, interactive verification, and batched aggregation.</p>
+<p>Complexity is not a criticism. DAP solves a harder problem (aggregate statistics with formal DP guarantees across a distributed system). Croupier solves a simpler problem (did this channel produce this conversion?) with simpler machinery. The right tool depends on which problem you have.</p>
+<hr>
+<p><em>Croupier is a blind relay for cryptographic coupon books. <a href="https://github.com/kimjune01/croupier">Learn more</a> or <a href="https://croupier.ad">request early access</a>.</em></p>
+
+</div>
+<div class="border-t border-card-border mt-12 pt-8">
+<a href="/blog" class="text-accent-green hover:text-accent-green-hover transition-colors text-sm">&#8592; Back to all posts</a>
+</div>
+</article>
+</body>
+</html>

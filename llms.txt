@@ -48,4 +48,4 @@ Cryptographic coupons solve this because the advertiser holds the private key. N
 
 ## Blog
 
-The Croupier blog covers ad attribution fraud, cookie hijacking, platform self-reporting problems, and the case for cryptographic attribution. Topics include comparisons with UTM tracking, AppsFlyer, DoubleVerify, Google Privacy Sandbox, Northbeam, and Triple Whale.
+The Croupier blog covers ad attribution fraud, cookie hijacking, platform self-reporting problems, and the case for cryptographic attribution. Topics include comparisons with UTM tracking, AppsFlyer, DoubleVerify, Google Privacy Sandbox, Northbeam, Triple Whale, and the IETF Distributed Aggregation Protocol (DAP).

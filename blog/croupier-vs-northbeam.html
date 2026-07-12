@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Croupier vs Northbeam: ML Models vs Mathematical Proof — Croupier</title>
+<meta name="description" content="Northbeam uses black-box ML to assign fractional credit; Croupier provides cryptographic proof of each touchpoint." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://croupier.click/blog/croupier-vs-northbeam" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Croupier vs Northbeam: ML Models vs Mathematical Proof — Croupier" />
+<meta property="og:description" content="Northbeam uses black-box ML to assign fractional credit; Croupier provides cryptographic proof of each touchpoint." />
+<meta property="og:url" content="https://croupier.click/blog/croupier-vs-northbeam" />
+<meta property="og:site_name" content="Croupier" />
+<meta property="og:image" content="https://croupier.click/og-card.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Croupier vs Northbeam: ML Models vs Mathematical Proof — Croupier" />
+<meta name="twitter:description" content="Northbeam uses black-box ML to assign fractional credit; Croupier provides cryptographic proof of each touchpoint." />
+<meta name="twitter:image" content="https://croupier.click/og-card.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9824;</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/index-DdRUP43R.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Croupier vs Northbeam: ML Models vs Mathematical Proof",
+  "description": "Northbeam uses black-box ML to assign fractional credit; Croupier provides cryptographic proof of each touchpoint.",
+  "datePublished": "2026-02-19",
+  "dateModified": "2026-02-19",
+  "url": "https://croupier.click/blog/croupier-vs-northbeam",
+  "mainEntityOfPage": "https://croupier.click/blog/croupier-vs-northbeam",
+  "image": "https://croupier.click/og-card.png",
+  "author": {
+    "@type": "Person",
+    "name": "June Kim",
+    "url": "https://june.kim"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Croupier",
+    "url": "https://croupier.click"
+  }
+}
+</script>
+</head>
+<body>
+<nav class="sticky top-0 z-50 bg-bg/80 backdrop-blur-md border-b border-card-border">
+<div class="max-w-3xl mx-auto px-6 h-16 flex items-center gap-4">
+<a href="/blog" class="text-text-muted hover:text-text transition-colors text-sm">&#8592; Blog</a>
+<a href="/" class="font-display text-lg font-bold italic flex items-center gap-2"><span class="text-accent-gold">&#9824;</span> Croupier</a>
+</div>
+</nav>
+<article class="max-w-3xl mx-auto px-6 py-12">
+<div class="mb-8"><time class="text-text-muted/60 font-mono text-sm">February 19, 2026</time></div>
+<div class="prose">
+<h1>Croupier vs Northbeam: ML Models vs Mathematical Proof</h1>
+<p><em>March 2026 | Croupier Blog</em></p>
+<p>Northbeam is a marketing attribution platform that uses machine learning to stitch together customer journeys from first-party signals. Their DNS-level script integration is harder for ad blockers to detect than a standard JavaScript pixel. In October 2025, they launched &quot;deterministic view-through attribution&quot; for verified video impressions.</p>
+<p>Northbeam represents the state of the art in model-based attribution. Croupier takes a fundamentally different approach: proof-based attribution.</p>
+<h2>How Northbeam Works</h2>
+<p>Northbeam installs at the DNS level — their tracking script looks like first-party infrastructure to the browser. This gives them better data collection than pixel-based competitors since ad blockers have a harder time distinguishing Northbeam&#39;s script from the brand&#39;s own code.</p>
+<p>Their ML model collects touchpoints across the customer journey and assigns fractional credit. A customer might see a Facebook ad (30% credit), click a Google search ad (50% credit), and convert on a direct visit (20% credit). The model decides the weights.</p>
+<p>Pricing starts around $999/month for brands spending under $250K/month on ads, scaling to $2,500+ for larger spenders.</p>
+<h2>The Model Problem</h2>
+<p>Northbeam&#39;s model is sophisticated. It&#39;s also a black box.</p>
+<p><strong>You can&#39;t verify the weights.</strong> When Northbeam says Facebook deserves 30% credit and Google deserves 50%, there&#39;s no way to independently check those numbers. The ML model is proprietary. You trust the output.</p>
+<p><strong>Models optimize for plausibility, not truth.</strong> ML attribution models find patterns in data that are statistically plausible. A plausible attribution is not the same as a proven attribution. If the model has a systematic bias — say, it over-credits view-through impressions — every output reflects that bias, and the advertiser can&#39;t detect it.</p>
+<p><strong>&quot;Deterministic&quot; still means &quot;Northbeam determined it.&quot;</strong> Their new deterministic view-through feature ties verified video impressions to purchases. But &quot;deterministic&quot; here means Northbeam can deterministically link the view to the purchase using their data. It doesn&#39;t mean the advertiser can independently confirm the link.</p>
+<p><strong>Platform data is still an input.</strong> Northbeam collects first-party data from its DNS-level integration, but it also imports platform-reported data for ad spend, impressions, and clicks. The model&#39;s inputs include self-reported numbers from the platforms being measured.</p>
+<h2>How Croupier Differs</h2>
+<p>Croupier doesn&#39;t model attribution. It proves it.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Northbeam</th>
+<th>Croupier</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Method</td>
+<td>ML model assigns credit across touchpoints</td>
+<td>Cryptographic signature verifies specific channel</td>
+</tr>
+<tr>
+<td>Output</td>
+<td>Fractional credit percentages</td>
+<td>Binary: valid signature or not</td>
+</tr>
+<tr>
+<td>Verifiable by advertiser?</td>
+<td>No (proprietary model)</td>
+<td>Yes (check own signature)</td>
+</tr>
+<tr>
+<td>Multi-touch?</td>
+<td>Yes (fractional credit)</td>
+<td>Per-channel (one coupon per impression)</td>
+</tr>
+<tr>
+<td>Accuracy claim</td>
+<td>Model-dependent</td>
+<td>Mathematical certainty</td>
+</tr>
+<tr>
+<td>Requires trusting</td>
+<td>Northbeam&#39;s algorithm</td>
+<td>Cryptographic math</td>
+</tr>
+<tr>
+<td>Pricing</td>
+<td>$999-$2,500+/month</td>
+<td>Flat monthly relay fee</td>
+</tr>
+</tbody></table>
+<p>The distinction matters most when the numbers disagree. If Northbeam says a channel drove 30% of your conversions and your coupon redemptions show 5%, which number do you act on? The model is a prediction. The coupon is a receipt.</p>
+<h2>Where Northbeam Wins</h2>
+<p>Northbeam provides capabilities Croupier doesn&#39;t:</p>
+<ul>
+<li><strong>Full-journey visualization.</strong> See every touchpoint in the customer journey across all channels.</li>
+<li><strong>Media mix allocation.</strong> Understand how budget shifts between channels affect overall performance.</li>
+<li><strong>View-through attribution.</strong> Credit channels for impressions that influenced a conversion even without a click.</li>
+<li><strong>Real-time dashboards.</strong> Monitor performance across campaigns continuously.</li>
+</ul>
+<p>If you need a full marketing analytics platform with cross-channel journey mapping, Northbeam does that. Croupier is narrower: it proves which channels delivered real conversions.</p>
+<h2>Where Croupier Wins</h2>
+<ul>
+<li><strong>Cryptographic certainty.</strong> No ML model is 100% accurate. A valid signature is.</li>
+<li><strong>No black box.</strong> The advertiser verifies their own cryptographic signature. The logic is: valid signature = valid attribution. No algorithm to trust.</li>
+<li><strong>Hijack-proof.</strong> A signed token can&#39;t be overwritten by a browser extension or faked by a bot.</li>
+<li><strong>No platform data dependency.</strong> Croupier&#39;s measurement is entirely independent of platform-reported metrics.</li>
+</ul>
+<h2>Using Them Together</h2>
+<p>The strongest setup: use Northbeam for strategic media planning and Croupier for ground-truth calibration.</p>
+<p>Northbeam&#39;s model tells you the shape of your marketing funnel — which channels play which roles, where to shift budget. Croupier&#39;s coupons tell you the actual conversion rate per channel, verified cryptographically.</p>
+<p>Calibrate the model against the proof. If Northbeam&#39;s model says Channel A drives 200 conversions/month and Croupier&#39;s coupons verify 190, the model is accurate for that channel. If the model says 200 and coupons verify 50, retrain or re-examine.</p>
+<p>Models are useful for planning. Proof is necessary for accountability. The best measurement stack has both.</p>
+<hr>
+<p><em>Croupier is a blind relay for cryptographic coupon books. <a href="https://github.com/kimjune01/croupier">Learn more</a> or <a href="https://croupier.ad">request early access</a>.</em></p>
+
+</div>
+<div class="border-t border-card-border mt-12 pt-8">
+<a href="/blog" class="text-accent-green hover:text-accent-green-hover transition-colors text-sm">&#8592; Back to all posts</a>
+</div>
+</article>
+</body>
+</html>

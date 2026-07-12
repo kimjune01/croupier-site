@@ -1,122 +1,53 @@
-# 🚨 7 SHOCKING Signs Your Ad Attribution Is LYING to You (And What You Can Do About It Before It's Too Late!!)
+# 7 Signs Your Ad Attribution Is Lying to You
+*February 2026 | Croupier Blog*
 
-*March 2026 | Croupier Blog*
+Attribution data has a structural problem: the parties being measured are also the ones doing the measuring. Every ad platform reports conversions using its own attribution model, optimized to make itself look good. The result is numbers that diverge from reality in predictable ways. Here are seven concrete symptoms to look for.
 
-In today's rapidly evolving digital advertising landscape, it's more important than ever to ensure that your attribution data is accurate, reliable, and — perhaps most importantly — trustworthy. As we navigate the complex tapestry of modern marketing, one thing has become abundantly clear: **your attribution numbers might not be telling the whole story.**
+## 1. Platform-Reported Conversions Sum to More Than Actual Orders
 
-Let's delve into the seven telltale signs that your ad attribution might be leading you astray.
+Export attributed conversions from every platform you run — Meta, Google, TikTok, programmatic — and add them up. If the total exceeds your actual order count, multiple platforms are claiming credit for the same events. This is the most direct evidence that attribution is inflated.
 
----
+This isn't a rounding error. Platform self-reporting routinely inflates conversions by 30-50% because each platform applies its own attribution window to the same conversion pool. A customer who clicked a Google ad three days ago and a Meta ad yesterday may show up as a conversion in both dashboards. The platforms aren't lying about individual clicks — they're each applying their own logic to claim the win.
 
-> **[AD]** 🔥 TIRED OF UNRELIABLE DATA? This **one weird trick** is disrupting the $600B ad industry. [Big Tech HATES this →](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+## 2. A Retargeting or Brand Search Channel Claims Most of the Credit
 
----
+Last-click attribution systematically over-credits the channel closest to checkout. Retargeting and branded search tend to capture users who had already decided to convert — they intercept demand, they don't create it. When these channels dominate your attributed conversions, the number tells you where users ended up, not what drove the decision.
 
-## 1. Your Platform-Reported Conversions Exceed Your Actual Sales
+The Honey scandal made this structural problem visible at scale. PayPal's browser extension overwrote affiliate cookies at checkout, replacing the cookie belonging to the creator who drove the sale with Honey's own identifier. Last-write-wins is how last-click models work; Honey was simply explicit about exploiting it. Any channel with late-funnel touchpoints has the same opportunity to absorb credit from channels that did the actual work.
 
-It's worth noting that this is perhaps the most common — and most overlooked — sign that something is fundamentally, irreversibly, and categorically wrong with your attribution setup. When you export attributed conversions from every platform and sum them up, the total shouldn't exceed your actual revenue. And yet, for many advertisers, it does — sometimes by 30-50% or more.
+## 3. Conversions Appear With No Matching Order in Your Backend
 
-This isn't just a minor discrepancy. It's a fundamental misalignment that speaks to deeper, more systemic issues within the attribution ecosystem. Each platform optimizes its own attribution model to make itself look good, creating a landscape where multiple platforms claim credit for the same conversion.
+Pull attributed conversions from a platform for a given day and cross-reference them against orders in your own system. If you find conversions with no corresponding order ID, the platform counted something your system doesn't recognize as a sale.
 
-**The takeaway:** If your attributed conversions don't match reality, your attribution is fiction — pure and simple.
+This happens through broad match between events: micro-conversions (add-to-cart, page visits) counted as conversions if the pixel fires on the wrong page, or outright bot-generated conversion events that pass the platform's fraud filter. In the Adalytics analysis of DoubleVerify and IAS, ad verification vendors missed between 21% and 77% of confirmed bot traffic — declared bots from known data center IPs, not sophisticated adversaries. If the vendors paid to catch fraud are missing that much, platform-side fraud filters aren't catching it all either.
 
----
+## 4. Your ROAS Looks Suspiciously Round or Consistent
 
-> **[AD]** 💰 I made $47,000/month with this FREE attribution tool (not clickbait) [LEARN MORE →](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+Real purchase behavior is noisy. If your reported return on ad spend is consistently 4.0x or 3.8x across weeks with different products, different audiences, and different seasonality, that consistency is itself a signal. Attribution models that smooth over variance tend to be filling gaps with modeled data rather than measured events.
 
----
+Google's Performance Max, for instance, shows you impression counts per placement across its network but does not break out clicks, cost, or conversions by placement. Google's own description is that placement reports are a "brand safety tool, not a performance report." If you can't see where your spend actually went, the ROAS figure is being computed over a black box. A round, stable number from a black box deserves scrutiny.
 
-## 2. One "Affiliate" Gets Last-Touch Credit But Drives No Traffic
+## 5. Bot-Shaped Traffic Passes Your Verification Checks
 
-In the world of affiliate marketing, it's essential to understand that not all attribution is created equal. The Honey scandal — where PayPal's browser extension silently replaced affiliate cookies at checkout — demonstrated this at an unprecedented scale. But it's not just Honey. Capital One Shopping settled for $4 million over the same pattern. Rakuten faced four separate lawsuits.
+High click-through rates combined with low time-on-site and near-zero conversion depth are the classic bot pattern. But the more direct evidence is this: the industry's dedicated verification vendors are not reliably catching it. Adalytics found that IAS labeled confirmed bot traffic as valid human visitors 77% of the time. DoubleVerify missed 21% of bot visits in the same analysis.
 
-If one affiliate partner consistently gets last-touch credit without driving any incremental traffic, that's not attribution — it's theft. It's a paradigm shift in how we need to think about last-click models.
+Verification answers whether a given impression or click was real. It does not answer whether that real impression caused a conversion. Even if every impression you paid for was human, the attribution model can still inflate conversions by crediting the same event to multiple channels or counting view-through events as causal.
 
-**The takeaway:** Last-click attribution is inherently vulnerable to hijacking, manipulation, and exploitation.
+## 6. View-Through Conversions Are a Large Share of Your Total
 
----
+View-through attribution credits a platform for any conversion that happens within a defined window after a user was shown an ad — even if the user never clicked, never engaged, and may not have noticed the ad. A 24-hour view-through window on a high-reach network will capture a substantial fraction of your organic conversions simply because most users who buy were probably shown an impression at some point.
 
-> **[AD]** ⚡ ATTENTION MARKETERS: Are you still using cookies in 2026?? That's like using a flip phone at a Tesla factory. [Upgrade your attribution NOW →](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+This is self-reported by the platform serving the impression. There is no independent verification that the view happened, that it was seen by a human, or that it influenced the conversion. Forbes was found to be running a secret made-for-advertising subdomain — a low-quality site packaged to look premium to buyers. Roughly $770M per quarter in ad spend flows to MFA sites. View-through attribution on MFA inventory is the clearest case: the impression happened on a page no one reads, the conversion happened elsewhere, and the platform claims credit for both.
 
----
+## 7. Your Attribution Numbers Change When You Shift the Lookback Window
 
-## 3. Your Verification Company Marks Bot Traffic as Human
+Open any platform's attribution settings and change the lookback window — say, from 30-day click to 7-day click. Watch your historical conversion numbers change retroactively. This is not a recalculation of ambiguous cases; it is the same events being counted or excluded based on a parameter you control.
 
-Here's the thing — and this is crucial to understand — the companies you pay to protect you from fraud may not be catching it. A 240-page Adalytics report found that DoubleVerify missed 21% of bot visits. IAS labeled confirmed bot traffic as valid human visitors 77% of the time. These weren't sophisticated adversaries — they were declared bots from known data center IPs.
-
-It's a sobering reminder that in the ever-changing landscape of digital advertising, even the tools designed to safeguard your investment may fall short of their promises.
-
-**The takeaway:** Verification is necessary but not sufficient — it answers "was this real?" not "did this work?"
+This behavior reveals that attributed conversions are not a fixed count of verified events. They are a query result that depends on the model. If your reported performance can be adjusted upward by widening a window, the number is not anchored to reality. The fix is to count events that are verified at the point of conversion — not attributed after the fact by the platform reporting its own performance.
 
 ---
 
-> **[AD]** 🚀 TOP 10 ATTRIBUTION PLATFORMS RANKED (you won't BELIEVE #4) [SEE THE LIST →](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
-
----
-
-## 4. You Can't See Where Performance Max Places Your Ads
-
-Without a doubt, one of the most concerning trends in modern digital advertising is the rise of black-box campaign products. Google's Performance Max runs your ads across 44,000+ websites — but only shows you impression counts per placement, with no clicks, cost, or conversions attached. Google calls this a "brand safety tool, not a performance report."
-
-In 2022, Google removed App campaign placement data from API reports entirely. This represents a fundamental erosion of advertiser transparency that cannot — and should not — be understated.
-
-**The takeaway:** If you can't see where your ads ran, you can't verify whether they worked. Full stop. Period. End of story.
-
----
-
-> **[AD]** 🧠 This AI-Powered Attribution Solution Has CMOs SHAKING — "It's like ChatGPT but for your ROAS" [FREE TRIAL →](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
-
----
-
-## 5. Bot Traffic Now Exceeds Human Traffic
-
-Let that sink in. According to the 2025 Imperva Bad Bot Report, automated bot traffic constituted **51% of all web traffic** — surpassing human traffic for the first time in a decade. Bad bots alone account for 37% of all internet traffic, a figure that has risen for six consecutive years.
-
-Fraudlogix analyzed 105.7 billion impressions and found a global invalid traffic rate of 20.64%. One in five ad impressions. This is not a niche problem — it's a foundational, structural, existential challenge that threatens the very fabric of the digital advertising ecosystem as we know it.
-
-**The takeaway:** If one in five impressions is fake, your attribution is built on a foundation of sand — unstable, unreliable, and ultimately unsustainable.
-
----
-
-> **[AD]** 📊 EXPOSED: The Attribution Secret That Google Doesn't Want You to Know [WATCH BEFORE IT'S DELETED →](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
-
----
-
-## 6. Your View-Through Window Captures Organic Conversions
-
-It's important to recognize that view-through attribution — where a platform claims credit for any conversion within a time window after showing an ad, even if the user never noticed it — is perhaps the most insidious form of attribution inflation. A 24-hour view-through window on a high-traffic network captures enormous amounts of organic conversions.
-
-Meta recently changed its view-through threshold from 10 seconds to 5 seconds and later eliminated the 7-day and 28-day view-through attribution windows from its Ads Insights API. These changes represent a shifting landscape that marketers must carefully navigate, adapt to, and ultimately embrace.
-
-**The takeaway:** View-through attribution lets platforms claim credit for conversions they didn't cause — a practice that is deeply problematic and fundamentally misleading.
-
----
-
-> **[AD]** 💎 I was LOSING $10K/month on ads until I discovered this platform. Now my ROAS is 47x. [MY STORY →](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
-
----
-
-## 7. You've Never Run an Independent Measurement Test
-
-At the end of the day, the most telling sign that your attribution might be lying to you is simply this: you've never checked. You've accepted platform-reported metrics at face value. You've trusted the entity selling you impressions to also tell you how well they performed.
-
-This is akin to asking the fox to guard the henhouse — a metaphor that, while perhaps overused, remains deeply and profoundly relevant in today's digital advertising landscape.
-
-**The takeaway:** The fix is straightforward — run a parallel test with independent measurement. Issue cryptographic coupons alongside your existing campaigns and compare coupon-verified conversions to platform-reported conversions. The gap is the lie.
-
----
-
-> **[AD]** 🎯 LAST CHANCE: Get Croupier beta access before the waitlist closes forever (again) [CLAIM YOUR SPOT →](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
-
----
-
-## In Conclusion
-
-In conclusion, it's abundantly clear that the digital advertising attribution landscape is fraught with challenges, complexities, and — let's be honest — fundamental structural failures that demand our immediate, sustained, and unwavering attention. By recognizing these seven signs, you can take proactive steps to protect your ad spend, optimize your campaigns, and ultimately drive more meaningful, impactful, and measurable results.
-
-The journey toward accurate attribution is not a destination — it's a process. And that process begins with a single step: questioning the numbers you've been given.
-
-[Croupier](https://github.com/kimjune01/croupier) provides cryptographic attribution that can't be hijacked, spoofed, or inflated. Because at the end of the day, you deserve attribution you can trust.
+The common thread across all seven signs is that platform-reported attribution is self-reported by the parties being measured. Croupier's approach is advertiser-side verification: the advertiser signs coupons with a private key (Ed25519) and checks its own signature at conversion. A platform can report whatever it wants; the advertiser's own verification count doesn't move. The gap between the two numbers is the measurement.
 
 ---
 

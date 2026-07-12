@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Croupier vs AppsFlyer: Why Mobile Attribution Still Trusts the Wrong Party — Croupier</title>
+<meta name="description" content="AppsFlyer depends on self-reported data from the ad networks it is supposed to measure." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://croupier.click/blog/croupier-vs-appsflyer" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Croupier vs AppsFlyer: Why Mobile Attribution Still Trusts the Wrong Party — Croupier" />
+<meta property="og:description" content="AppsFlyer depends on self-reported data from the ad networks it is supposed to measure." />
+<meta property="og:url" content="https://croupier.click/blog/croupier-vs-appsflyer" />
+<meta property="og:site_name" content="Croupier" />
+<meta property="og:image" content="https://croupier.click/og-card.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Croupier vs AppsFlyer: Why Mobile Attribution Still Trusts the Wrong Party — Croupier" />
+<meta name="twitter:description" content="AppsFlyer depends on self-reported data from the ad networks it is supposed to measure." />
+<meta name="twitter:image" content="https://croupier.click/og-card.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9824;</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/index-DdRUP43R.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Croupier vs AppsFlyer: Why Mobile Attribution Still Trusts the Wrong Party",
+  "description": "AppsFlyer depends on self-reported data from the ad networks it is supposed to measure.",
+  "datePublished": "2026-02-10",
+  "dateModified": "2026-02-10",
+  "url": "https://croupier.click/blog/croupier-vs-appsflyer",
+  "mainEntityOfPage": "https://croupier.click/blog/croupier-vs-appsflyer",
+  "image": "https://croupier.click/og-card.png",
+  "author": {
+    "@type": "Person",
+    "name": "June Kim",
+    "url": "https://june.kim"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Croupier",
+    "url": "https://croupier.click"
+  }
+}
+</script>
+</head>
+<body>
+<nav class="sticky top-0 z-50 bg-bg/80 backdrop-blur-md border-b border-card-border">
+<div class="max-w-3xl mx-auto px-6 h-16 flex items-center gap-4">
+<a href="/blog" class="text-text-muted hover:text-text transition-colors text-sm">&#8592; Blog</a>
+<a href="/" class="font-display text-lg font-bold italic flex items-center gap-2"><span class="text-accent-gold">&#9824;</span> Croupier</a>
+</div>
+</nav>
+<article class="max-w-3xl mx-auto px-6 py-12">
+<div class="mb-8"><time class="text-text-muted/60 font-mono text-sm">February 10, 2026</time></div>
+<div class="prose">
+<h1>Croupier vs AppsFlyer: Why Mobile Attribution Still Trusts the Wrong Party</h1>
+<p><em>March 2026 | Croupier Blog</em></p>
+<p>AppsFlyer is the market leader in mobile attribution. Their SDK sits inside your app, captures install and in-app events, and matches them against ad engagement data to determine which campaign drove each install. Billions of events daily. Thousands of app companies depend on it.</p>
+<p>But AppsFlyer has a structural problem it can&#39;t fix: it depends on self-reported data from the ad networks it&#39;s supposed to measure.</p>
+<h2>How AppsFlyer Works</h2>
+<p>You integrate AppsFlyer&#39;s SDK into your app. When a user installs and opens the app, the SDK fires an event to AppsFlyer&#39;s servers. AppsFlyer&#39;s attribution engine then matches this install against click and impression data from ad networks.</p>
+<p>For most smaller networks, AppsFlyer uses its own tracking links — it sees the click, records the device ID, and matches it to the install. This works reasonably well.</p>
+<p>The problem is Self-Reporting Networks (SRNs).</p>
+<h2>The SRN Problem</h2>
+<p>Meta, Google, TikTok, and Snap are Self-Reporting Networks. They don&#39;t allow AppsFlyer to place tracking links in their ad units. Instead, when AppsFlyer notifies them of an install, the SRN checks its own records and reports back whether it showed an ad to that device.</p>
+<p>AppsFlyer never sees the raw click or impression data from these networks. It receives a claim: &quot;Yes, we showed an ad to this device before they installed.&quot; AppsFlyer applies its own attribution logic and deduplication, but the input data from the biggest networks is a black box.</p>
+<p>As one industry analysis put it: &quot;Members aren&#39;t privy to how Facebook decides what to take credit for.&quot;</p>
+<p>Meta, Google, and TikTok represent the majority of mobile ad spend. The measurement partner that&#39;s supposed to arbitrate between advertisers and networks can&#39;t independently verify the data from the networks that matter most.</p>
+<h2>Attack Vectors</h2>
+<p>Mobile attribution fraud is an industry:</p>
+<ul>
+<li><strong>Click injection.</strong> Malware on the device detects when an app is being installed and fires a fake click just before the install completes, claiming credit.</li>
+<li><strong>SDK spoofing.</strong> Fraudsters reverse-engineer the SDK communication protocol and send fake install events from non-existent devices.</li>
+<li><strong>Device farms.</strong> Real devices, real installs, but done at scale by workers or automation to collect install bounties.</li>
+</ul>
+<p>AppsFlyer&#39;s Protect360 catches some of these. But it&#39;s an arms race — fraud evolves, detection catches up, fraud adapts. The fundamental architecture hasn&#39;t changed: a third party collects signals and makes a judgment call about who gets credit.</p>
+<h2>How Croupier Differs</h2>
+<p>Croupier doesn&#39;t arbitrate between competing claims. The advertiser issues signed tokens, the publisher distributes them, and the advertiser verifies their own signature at the conversion endpoint.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>AppsFlyer</th>
+<th>Croupier</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who decides attribution?</td>
+<td>AppsFlyer (with SRN self-reported inputs)</td>
+<td>Advertiser (signature verification)</td>
+</tr>
+<tr>
+<td>Can the ad network inflate claims?</td>
+<td>Yes (SRNs report their own data)</td>
+<td>No (network can&#39;t forge advertiser&#39;s signature)</td>
+</tr>
+<tr>
+<td>Click injection possible?</td>
+<td>Yes (common attack vector)</td>
+<td>No (token must be validly signed before distribution)</td>
+</tr>
+<tr>
+<td>SDK spoofing possible?</td>
+<td>Yes (protocol can be reverse-engineered)</td>
+<td>No (can&#39;t forge cryptographic signature)</td>
+</tr>
+<tr>
+<td>Requires SDK?</td>
+<td>Yes (in-app SDK)</td>
+<td>No (token in URL parameter)</td>
+</tr>
+<tr>
+<td>Pricing</td>
+<td>Per-conversion fee ($0.03-0.06)</td>
+<td>Flat monthly relay fee</td>
+</tr>
+</tbody></table>
+<p>The key architectural difference: AppsFlyer sits between the advertiser and the network, accepting data from both sides and making a judgment. Croupier doesn&#39;t sit between anyone. The advertiser issues the proof. The customer carries the proof. The advertiser verifies the proof. No intermediary makes an attribution decision.</p>
+<h2>The Trust Gap</h2>
+<p>When you use AppsFlyer, you trust:</p>
+<ol>
+<li><strong>AppsFlyer</strong> to correctly match installs to ad engagement</li>
+<li><strong>Self-Reporting Networks</strong> to honestly report which devices they showed ads to</li>
+<li><strong>The SDK</strong> to not be spoofed or manipulated</li>
+<li><strong>Protect360</strong> to catch fraud that exploits any of the above</li>
+</ol>
+<p>When you use Croupier, you trust:</p>
+<ol>
+<li><strong>Cryptography</strong> — that your signature can&#39;t be forged without your private key</li>
+</ol>
+<p>The trust surface shrinks from four fallible entities to one mathematical property. Blind signatures have been proven secure since 1983. Privacy Pass (RFC 9578) standardized the token format. These aren&#39;t experimental — Apple, Brave, and Cloudflare run them in production.</p>
+<h2>Where AppsFlyer Still Wins</h2>
+<p>AppsFlyer provides a full suite of mobile marketing tools that Croupier doesn&#39;t attempt:</p>
+<ul>
+<li><strong>Deep linking</strong> — routing users to specific in-app content</li>
+<li><strong>Audience segmentation</strong> — grouping users by behavior and campaign</li>
+<li><strong>SKAdNetwork / AdAttributionKit integration</strong> — Apple-mandated attribution</li>
+<li><strong>Fraud analytics dashboard</strong> — visualizing fraud patterns</li>
+<li><strong>Cohort analysis</strong> — LTV by acquisition source</li>
+</ul>
+<p>If you need a mobile marketing platform, AppsFlyer does a lot. But if the question is &quot;which network actually drove this install, and can I prove it?&quot; AppsFlyer&#39;s answer depends on trusting the networks it measures. Croupier&#39;s answer depends on math.</p>
+<h2>Running a Parallel Test</h2>
+<p>The simplest way to evaluate: run cryptographic coupons alongside your AppsFlyer attribution for one campaign.</p>
+<p>Issue a coupon book for a specific publisher. Have them embed tokens in their ad click URLs. At conversion (app install or in-app event), verify the signature at your endpoint.</p>
+<p>Compare AppsFlyer&#39;s attributed installs for that publisher to coupon-verified installs. If the numbers match, your attribution is accurate. If AppsFlyer shows 1,000 installs and coupons verify 400, the gap is the question you need to answer.</p>
+<hr>
+<p><em>Croupier is a blind relay for cryptographic coupon books. <a href="https://github.com/kimjune01/croupier">Learn more</a> or <a href="https://croupier.ad">request early access</a>.</em></p>
+
+</div>
+<div class="border-t border-card-border mt-12 pt-8">
+<a href="/blog" class="text-accent-green hover:text-accent-green-hover transition-colors text-sm">&#8592; Back to all posts</a>
+</div>
+</article>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Croupier vs Triple Whale: First-Party Pixels vs Cryptographic Proof — Croupier</title>
+<meta name="description" content="Triple Whale relies on forgeable UTM parameters and modeled attribution; Croupier proves what actually happened." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://croupier.click/blog/croupier-vs-triple-whale" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Croupier vs Triple Whale: First-Party Pixels vs Cryptographic Proof — Croupier" />
+<meta property="og:description" content="Triple Whale relies on forgeable UTM parameters and modeled attribution; Croupier proves what actually happened." />
+<meta property="og:url" content="https://croupier.click/blog/croupier-vs-triple-whale" />
+<meta property="og:site_name" content="Croupier" />
+<meta property="og:image" content="https://croupier.click/og-card.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Croupier vs Triple Whale: First-Party Pixels vs Cryptographic Proof — Croupier" />
+<meta name="twitter:description" content="Triple Whale relies on forgeable UTM parameters and modeled attribution; Croupier proves what actually happened." />
+<meta name="twitter:image" content="https://croupier.click/og-card.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9824;</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/index-DdRUP43R.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Croupier vs Triple Whale: First-Party Pixels vs Cryptographic Proof",
+  "description": "Triple Whale relies on forgeable UTM parameters and modeled attribution; Croupier proves what actually happened.",
+  "datePublished": "2026-02-24",
+  "dateModified": "2026-02-24",
+  "url": "https://croupier.click/blog/croupier-vs-triple-whale",
+  "mainEntityOfPage": "https://croupier.click/blog/croupier-vs-triple-whale",
+  "image": "https://croupier.click/og-card.png",
+  "author": {
+    "@type": "Person",
+    "name": "June Kim",
+    "url": "https://june.kim"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Croupier",
+    "url": "https://croupier.click"
+  }
+}
+</script>
+</head>
+<body>
+<nav class="sticky top-0 z-50 bg-bg/80 backdrop-blur-md border-b border-card-border">
+<div class="max-w-3xl mx-auto px-6 h-16 flex items-center gap-4">
+<a href="/blog" class="text-text-muted hover:text-text transition-colors text-sm">&#8592; Blog</a>
+<a href="/" class="font-display text-lg font-bold italic flex items-center gap-2"><span class="text-accent-gold">&#9824;</span> Croupier</a>
+</div>
+</nav>
+<article class="max-w-3xl mx-auto px-6 py-12">
+<div class="mb-8"><time class="text-text-muted/60 font-mono text-sm">February 24, 2026</time></div>
+<div class="prose">
+<h1>Croupier vs Triple Whale: First-Party Pixels vs Cryptographic Proof</h1>
+<p><em>March 2026 | Croupier Blog</em></p>
+<p>Triple Whale is the attribution tool of choice for Shopify and DTC brands. It puts a first-party pixel on your store, pulls in Shopify order data, and runs multi-touch attribution across your marketing channels. If you&#39;re spending $50K-$500K/month on ads, you&#39;ve probably evaluated it.</p>
+<p>Croupier takes a different approach. Instead of modeling what probably happened, it gives the advertiser cryptographic proof of what actually happened.</p>
+<h2>How Triple Whale Works</h2>
+<p>Triple Whale installs a JavaScript pixel on your Shopify store. When a visitor arrives, the pixel captures the traffic source (from UTM parameters), tracks on-site behavior, and matches it against real Shopify orders.</p>
+<p>Their attribution model distributes credit across touchpoints — first click, last click, linear, or their proprietary &quot;Total Impact Model.&quot; They claim to be within 10-15% accuracy compared to actual performance.</p>
+<p>Pricing starts at $199/month and scales with gross merchandise value, reaching $1,129/month or more at $6M GMV.</p>
+<h2>Where Triple Whale Falls Short</h2>
+<p><strong>UTM dependency.</strong> Triple Whale reads UTM parameters to identify traffic sources. UTMs are plain-text strings that anyone can forge, overwrite, or misformat. If a browser extension replaces the UTM at checkout, Triple Whale attributes the sale to the wrong source.</p>
+<p><strong>Pixel blockability.</strong> The first-party pixel is JavaScript running on your site. Ad blockers can block it. Consent banners can prevent it from loading. In privacy-conscious markets, significant traffic goes unmeasured.</p>
+<p><strong>Model opacity.</strong> Their &quot;Total Impact Model&quot; and &quot;10-15% accuracy&quot; claim are based on their own methodology. The advertiser trusts Triple Whale&#39;s algorithm to correctly assign credit. There&#39;s no way to independently verify that the model is right.</p>
+<p><strong>Platform data dependency.</strong> While Triple Whale collects first-party data from your pixel, it still ingests platform-reported metrics (ad spend, impressions, clicks) from Meta, Google, TikTok, and others. The inputs to the model include self-reported data from the platforms being measured.</p>
+<p><strong>No forgery protection.</strong> Triple Whale can tell you &quot;this conversion came from utm_source=facebook.&quot; It cannot tell you whether that UTM was legitimately placed by your Facebook campaign or injected by a third party.</p>
+<h2>How Croupier Differs</h2>
+<p>Croupier replaces the UTM with a signed token. Instead of a plain-text label that any script can write, the advertiser issues a cryptographically signed coupon that only they can create.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Triple Whale</th>
+<th>Croupier</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>How it identifies the source</td>
+<td>Reads UTM parameters</td>
+<td>Verifies cryptographic signature</td>
+</tr>
+<tr>
+<td>What proves attribution</td>
+<td>Statistical model</td>
+<td>Mathematical proof</td>
+</tr>
+<tr>
+<td>Can attribution be faked?</td>
+<td>Yes (forge UTMs)</td>
+<td>No (can&#39;t forge signatures)</td>
+</tr>
+<tr>
+<td>Depends on platform data?</td>
+<td>Yes (imports ad metrics)</td>
+<td>No (advertiser verifies own tokens)</td>
+</tr>
+<tr>
+<td>Blockable?</td>
+<td>Yes (JavaScript pixel)</td>
+<td>No (token is in the URL)</td>
+</tr>
+<tr>
+<td>Privacy model</td>
+<td>Pixel tracking with consent</td>
+<td>Blind signatures (no user tracking)</td>
+</tr>
+<tr>
+<td>Accuracy claim</td>
+<td>&quot;Within 10-15%&quot;</td>
+<td>Binary: valid signature or not</td>
+</tr>
+</tbody></table>
+<h2>When to Use Which</h2>
+<p><strong>Triple Whale is good at:</strong> Multi-channel dashboard, marketing mix visibility, Shopify-native integration, understanding the customer journey across touchpoints. If you want a unified view of your marketing spend and approximate attribution across all channels, Triple Whale does this well.</p>
+<p><strong>Croupier is good at:</strong> Proving which specific publisher or channel drove a conversion with cryptographic certainty. If you need to know that Publisher A converts at 8% and Publisher B converts at 0.1%, and you need that number to be un-fakeable, Croupier provides the proof.</p>
+<p>They solve different levels of the attribution problem:</p>
+<ul>
+<li>Triple Whale answers: &quot;Based on our model, we think Facebook drove 40% of this conversion and Google drove 60%.&quot;</li>
+<li>Croupier answers: &quot;This conversion presented a valid coupon issued for Publisher A&#39;s campaign. The signature checks out.&quot;</li>
+</ul>
+<h2>Running Them Together</h2>
+<p>Croupier doesn&#39;t replace your analytics dashboard. It adds a verification layer.</p>
+<p>Issue cryptographic coupons alongside your existing Triple Whale setup. For each channel, compare Triple Whale&#39;s modeled attribution to Croupier&#39;s verified redemption count.</p>
+<p>If Triple Whale says Facebook drove 200 conversions and Croupier&#39;s coupons verify 195, your model is accurate. If Triple Whale says 200 and Croupier verifies 80, the gap is the inflation you&#39;re paying for.</p>
+<p>The coupon doesn&#39;t need to understand the customer journey. It just needs to arrive at the conversion endpoint with a valid signature. That single fact — &quot;this conversion was reached through this channel&quot; — is the ground truth that all modeling should be calibrated against.</p>
+<hr>
+<p><em>Croupier is a blind relay for cryptographic coupon books. <a href="https://github.com/kimjune01/croupier">Learn more</a> or <a href="https://croupier.ad">request early access</a>.</em></p>
+
+</div>
+<div class="border-t border-card-border mt-12 pt-8">
+<a href="/blog" class="text-accent-green hover:text-accent-green-hover transition-colors text-sm">&#8592; Back to all posts</a>
+</div>
+</article>
+</body>
+</html>

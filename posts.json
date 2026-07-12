@@ -124,5 +124,11 @@
     "title": "After Third-Party Cookies: Attribution Without Tracking",
     "date": "2026-03-09",
     "summary": "Every cookie replacement recreates the same problems. Bearer attribution never depended on cookies in the first place."
+  },
+  {
+    "slug": "croupier-vs-dap",
+    "title": "Croupier vs DAP: Bearer Proofs vs Aggregate Privacy",
+    "date": "2026-03-10",
+    "summary": "DAP computes aggregate statistics privately. Croupier produces per-conversion proofs. Different questions, different architectures, different tradeoffs."
   }
 ]

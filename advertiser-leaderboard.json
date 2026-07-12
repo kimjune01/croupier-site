@@ -1,0 +1,12 @@
+[
+  { "advertiser": "CloudSync Pro", "vertical": "SaaS", "redemptionRate": 8.4, "settlementRate": 100, "volume": 45000 },
+  { "advertiser": "FreshRoast Coffee", "vertical": "D2C", "redemptionRate": 6.2, "settlementRate": 100, "volume": 28000 },
+  { "advertiser": "HomeGuard Security", "vertical": "Home Services", "redemptionRate": 5.8, "settlementRate": 99.8, "volume": 62000 },
+  { "advertiser": "PeakFit Climbing", "vertical": "Fitness", "redemptionRate": 5.1, "settlementRate": 100, "volume": 12000 },
+  { "advertiser": "LegalEase Templates", "vertical": "Legal", "redemptionRate": 4.3, "settlementRate": 100, "volume": 18000 },
+  { "advertiser": "BrightSmile Dental", "vertical": "Health", "redemptionRate": 3.6, "settlementRate": 98.5, "volume": 34000 },
+  { "advertiser": "QuickShip Logistics", "vertical": "B2B", "redemptionRate": 2.9, "settlementRate": 100, "volume": 88000 },
+  { "advertiser": "Wanderlust Retreats", "vertical": "Travel", "redemptionRate": 1.4, "settlementRate": 97.2, "volume": 55000 },
+  { "advertiser": "DropZone Supplements", "vertical": "D2C", "redemptionRate": 0.3, "settlementRate": 84.1, "volume": 420000 },
+  { "advertiser": "CryptoYield Finance", "vertical": "Finance", "redemptionRate": 0.08, "settlementRate": 62.3, "volume": 1200000 }
+]

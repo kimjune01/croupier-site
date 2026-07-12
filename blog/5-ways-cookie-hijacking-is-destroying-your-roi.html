@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>5 Ways Cookie Hijacking Is Destroying Your ROI — Croupier</title>
+<meta name="description" content="Browser extensions and affiliates silently overwrite tracking cookies, misattributing conversions at scale." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://croupier.click/blog/5-ways-cookie-hijacking-is-destroying-your-roi" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="5 Ways Cookie Hijacking Is Destroying Your ROI — Croupier" />
+<meta property="og:description" content="Browser extensions and affiliates silently overwrite tracking cookies, misattributing conversions at scale." />
+<meta property="og:url" content="https://croupier.click/blog/5-ways-cookie-hijacking-is-destroying-your-roi" />
+<meta property="og:site_name" content="Croupier" />
+<meta property="og:image" content="https://croupier.click/og-card.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="5 Ways Cookie Hijacking Is Destroying Your ROI — Croupier" />
+<meta name="twitter:description" content="Browser extensions and affiliates silently overwrite tracking cookies, misattributing conversions at scale." />
+<meta name="twitter:image" content="https://croupier.click/og-card.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9824;</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/index-DdRUP43R.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "5 Ways Cookie Hijacking Is Destroying Your ROI",
+  "description": "Browser extensions and affiliates silently overwrite tracking cookies, misattributing conversions at scale.",
+  "datePublished": "2026-02-05",
+  "dateModified": "2026-02-05",
+  "url": "https://croupier.click/blog/5-ways-cookie-hijacking-is-destroying-your-roi",
+  "mainEntityOfPage": "https://croupier.click/blog/5-ways-cookie-hijacking-is-destroying-your-roi",
+  "image": "https://croupier.click/og-card.png",
+  "author": {
+    "@type": "Person",
+    "name": "June Kim",
+    "url": "https://june.kim"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Croupier",
+    "url": "https://croupier.click"
+  }
+}
+</script>
+</head>
+<body>
+<nav class="sticky top-0 z-50 bg-bg/80 backdrop-blur-md border-b border-card-border">
+<div class="max-w-3xl mx-auto px-6 h-16 flex items-center gap-4">
+<a href="/blog" class="text-text-muted hover:text-text transition-colors text-sm">&#8592; Blog</a>
+<a href="/" class="font-display text-lg font-bold italic flex items-center gap-2"><span class="text-accent-gold">&#9824;</span> Croupier</a>
+</div>
+</nav>
+<article class="max-w-3xl mx-auto px-6 py-12">
+<div class="mb-8"><time class="text-text-muted/60 font-mono text-sm">February 5, 2026</time></div>
+<div class="prose">
+<h1>5 Ways Cookie Hijacking Is Destroying Your ROI</h1>
+<p><em>February 2026 | Croupier Blog</em></p>
+<p>Cookie-based attribution has a structural problem: the tracking cookie is a mutable value that any script on the page can overwrite. Browser extensions figured this out. So did fraudsters. So did the platforms that report their own performance to you. The result is that a meaningful portion of attribution data in any cookie-dependent campaign is wrong — silently, without any error state on the dashboard.</p>
+<p>These are the five concrete failure modes.</p>
+<h2>1. Extension Overwrite at Checkout</h2>
+<p>In December 2024, MegaLag published an investigation showing that PayPal&#39;s Honey extension was replacing affiliate tracking cookies at the moment of checkout — the highest-intent point in the funnel, where attribution credit is finally locked in. Honey had reached that moment at scale: it had sponsored roughly 5,000 videos across 1,000 YouTube channels, accumulating 7.8 billion views. Creators who promoted Honey were, in many cases, promoting a tool that then diverted their own commissions. In one documented instance, Honey redirected a $35 affiliate commission and returned 89 cents of &quot;Honey Gold&quot; to the user.</p>
+<p>The mechanism is simple: last-write-wins on the tracking cookie. Any extension that executes at checkout can write its own attribution value and claim the conversion.</p>
+<h2>2. Industry-Wide Last-Click Theft</h2>
+<p>Honey was the most visible case, but not the only one. Capital One Shopping faced identical allegations and settled in December 2025. Rakuten faced four separate complaints alleging its extension used hidden browser tabs to insert itself into affiliate attribution chains — a different method, the same outcome. By January 2026, Rakuten had removed Honey from its network, cutting off approximately 2,000 retail partners. Impact.com followed.</p>
+<p>The pattern is structural, not incidental. Any shopping extension with a large install base has an economic incentive to insert itself at checkout. The affiliate attribution model creates that incentive by making cookie possession at conversion the only thing that determines who gets paid.</p>
+<h2>3. Platform Self-Reporting Inflates Your Numbers</h2>
+<p>When a conversion happens, who counts it? Usually the platform that ran the ad — which has a direct interest in showing strong performance. Independent audits have found that platform self-reported conversion numbers inflate actual performance by 30 to 50 percent. The advertiser&#39;s dashboard shows a healthy return on ad spend; the platform&#39;s pixel fires on a conversion and reports it; neither event involves an independent verification of whether the sale was actually caused by the ad.</p>
+<p>Cookie-based attribution can&#39;t distinguish between a click that caused a purchase and a click that happened to precede a purchase the user would have made anyway. Platforms count both. The advertiser pays for both.</p>
+<h2>4. Ad Verification Vendors Miss Most Bot Traffic</h2>
+<p>Advertisers typically address fraud concerns by routing spend through ad verification vendors — DoubleVerify, Integral Ad Science, and similar services. These vendors are supposed to filter invalid traffic. Adalytics analysis found they missed between 21 and 77 percent of bot traffic, depending on the campaign and measurement context.</p>
+<p>This matters for attribution specifically because bots generate cookies. A bot click creates a tracking cookie just like a human click. If the bot triggers a conversion event — or if a real conversion happens on a device that also received bot traffic — the cookie can carry the wrong attribution. Verification vendors operating at the impression level don&#39;t have visibility into the conversion-level attribution that happens later.</p>
+<h2>5. Cross-Device Gaps and Conversion Dead Zones</h2>
+<p>A user sees an ad on their phone, clicks through, browses, and closes the tab. Three days later they buy on their desktop. The affiliate cookie from the phone never made it to the desktop session. A different cookie — or no cookie — gets credit.</p>
+<p>Cookie-based attribution is single-device by design. Probabilistic cross-device matching exists, but it relies on statistical inference rather than deterministic linkage. In practice, a meaningful share of conversions that were causally influenced by a click go unattributed, while conversions that were incidentally preceded by a click get fully attributed. The advertiser is paying for the wrong signal.</p>
+<h2>The Common Thread</h2>
+<p>All five failure modes share the same root cause: the tracking cookie is an unsigned, mutable value. Any script can overwrite it. Any platform can self-report against it. Any verification vendor can miss the fraud that corrupts it. Any device boundary can break it.</p>
+<p>Cryptographic attribution replaces the cookie with a signed token issued by the advertiser. The advertiser holds the private key and signs coupons using Ed25519 blind signatures, so no extension can overwrite the attribution without invalidating the signature, and no platform can self-report against a coupon book the advertiser controls. At conversion, the advertiser checks the signature — not a cookie value written by someone else. If the signature is valid, the conversion counts. If not, it doesn&#39;t. There&#39;s no ambiguity, and no third party in a position to inflate the number.</p>
+<hr>
+<p><em>Croupier is a blind relay for cryptographic coupon books. <a href="https://github.com/kimjune01/croupier">Learn more</a> or <a href="https://croupier.ad">request early access</a>.</em></p>
+
+</div>
+<div class="border-t border-card-border mt-12 pt-8">
+<a href="/blog" class="text-accent-green hover:text-accent-green-hover transition-colors text-sm">&#8592; Back to all posts</a>
+</div>
+</article>
+</body>
+</html>

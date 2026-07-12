@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Croupier vs Google Privacy Sandbox: Why the Browser Shouldn’t Own Attribution — Croupier</title>
+<meta name="description" content="Privacy Sandbox gave attribution control to the browser vendor that is also the largest ad platform." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://croupier.click/blog/croupier-vs-google-privacy-sandbox" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Croupier vs Google Privacy Sandbox: Why the Browser Shouldn’t Own Attribution — Croupier" />
+<meta property="og:description" content="Privacy Sandbox gave attribution control to the browser vendor that is also the largest ad platform." />
+<meta property="og:url" content="https://croupier.click/blog/croupier-vs-google-privacy-sandbox" />
+<meta property="og:site_name" content="Croupier" />
+<meta property="og:image" content="https://croupier.click/og-card.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Croupier vs Google Privacy Sandbox: Why the Browser Shouldn’t Own Attribution — Croupier" />
+<meta name="twitter:description" content="Privacy Sandbox gave attribution control to the browser vendor that is also the largest ad platform." />
+<meta name="twitter:image" content="https://croupier.click/og-card.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9824;</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/index-DdRUP43R.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Croupier vs Google Privacy Sandbox: Why the Browser Shouldn’t Own Attribution",
+  "description": "Privacy Sandbox gave attribution control to the browser vendor that is also the largest ad platform.",
+  "datePublished": "2026-02-16",
+  "dateModified": "2026-02-16",
+  "url": "https://croupier.click/blog/croupier-vs-google-privacy-sandbox",
+  "mainEntityOfPage": "https://croupier.click/blog/croupier-vs-google-privacy-sandbox",
+  "image": "https://croupier.click/og-card.png",
+  "author": {
+    "@type": "Person",
+    "name": "June Kim",
+    "url": "https://june.kim"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Croupier",
+    "url": "https://croupier.click"
+  }
+}
+</script>
+</head>
+<body>
+<nav class="sticky top-0 z-50 bg-bg/80 backdrop-blur-md border-b border-card-border">
+<div class="max-w-3xl mx-auto px-6 h-16 flex items-center gap-4">
+<a href="/blog" class="text-text-muted hover:text-text transition-colors text-sm">&#8592; Blog</a>
+<a href="/" class="font-display text-lg font-bold italic flex items-center gap-2"><span class="text-accent-gold">&#9824;</span> Croupier</a>
+</div>
+</nav>
+<article class="max-w-3xl mx-auto px-6 py-12">
+<div class="mb-8"><time class="text-text-muted/60 font-mono text-sm">February 16, 2026</time></div>
+<div class="prose">
+<h1>Croupier vs Google Privacy Sandbox: Why the Browser Shouldn&#39;t Own Attribution</h1>
+<p><em>March 2026 | Croupier Blog</em></p>
+<p>Google&#39;s Privacy Sandbox was supposed to be the post-cookie future of ad attribution. Chrome would handle attribution natively — matching ad impressions to conversions inside the browser with differential privacy to protect user identity.</p>
+<p>In October 2025, Google retired it due to low adoption. But the failure is instructive. The problem wasn&#39;t the technology. It was the architecture: giving the browser vendor control over attribution when the browser vendor is also the world&#39;s largest ad platform.</p>
+<h2>What Privacy Sandbox Promised</h2>
+<p>The Attribution Reporting API registered &quot;attribution sources&quot; (ad clicks and views) and &quot;triggers&quot; (conversions) inside Chrome. Event-level reports provided limited bits of conversion data with randomized noise. Summary reports aggregated across users inside a Trusted Execution Environment (TEE).</p>
+<p>The privacy properties were real. Individual users couldn&#39;t be tracked. Conversion data was noised. Aggregation happened in a secure enclave.</p>
+<h2>Why It Failed</h2>
+<p><strong>Google controlled every layer.</strong> The browser decided what got attributed. Google set the noise levels. Google ran the TEE. The advertiser received a report and had to trust it. There was no way to independently verify the raw data — it only existed decrypted inside Google&#39;s enclave.</p>
+<p><strong>It only worked in Chrome.</strong> Safari and Firefox had already blocked third-party cookies and had no reason to adopt Google&#39;s API. Attribution that only works in one browser isn&#39;t attribution — it&#39;s a platform feature.</p>
+<p><strong>It favored Google ads.</strong> The system was &quot;virtually guaranteed to over-value Google ads&quot; because it dealt with Google&#39;s ecosystem and assumed that an ad shown meant the ad drove the sale. The attribution logic ran inside the product sold by the company being measured.</p>
+<p><strong>Nobody adopted it.</strong> Google reversed course on cookie deprecation in July 2024, removing the forcing function. Without mandatory cookie removal, ad networks had no reason to migrate to a Google-controlled API. The Privacy Sandbox APIs became optional alternatives rather than mandatory replacements.</p>
+<h2>The Deeper Problem</h2>
+<p>Privacy Sandbox failed not because privacy-preserving attribution is impossible, but because the industry rejected an architecture where the largest ad seller also controlled the measurement infrastructure.</p>
+<p>This is the same conflict that exists in every self-reporting system. Google Ads reports Google Ads performance. Meta Ads reports Meta Ads performance. Privacy Sandbox formalized this conflict into a browser API and expected competitors to adopt it.</p>
+<h2>How Croupier Differs</h2>
+<p>Croupier&#39;s architecture eliminates the conflict by putting the advertiser in control of attribution.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Google Privacy Sandbox</th>
+<th>Croupier</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who controls attribution?</td>
+<td>Google (browser)</td>
+<td>Advertiser (signing key)</td>
+</tr>
+<tr>
+<td>Where does attribution run?</td>
+<td>Inside Chrome&#39;s TEE</td>
+<td>At advertiser&#39;s conversion endpoint</td>
+</tr>
+<tr>
+<td>Can advertiser verify raw data?</td>
+<td>No (only aggregated, noised reports)</td>
+<td>Yes (verify own signatures)</td>
+</tr>
+<tr>
+<td>Cross-browser?</td>
+<td>No (Chrome only)</td>
+<td>Yes (token is a URL parameter)</td>
+</tr>
+<tr>
+<td>Cross-platform?</td>
+<td>No (browser only)</td>
+<td>Yes (works in apps, email, podcasts)</td>
+</tr>
+<tr>
+<td>Privacy mechanism</td>
+<td>Differential privacy (noise)</td>
+<td>Blind signatures (unlinkability)</td>
+</tr>
+<tr>
+<td>Depends on browser vendor?</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Status</td>
+<td>Dead (retired Oct 2025)</td>
+<td>Active</td>
+</tr>
+</tbody></table>
+<p>The privacy properties are different too. Privacy Sandbox added noise to make individual conversions probabilistic — you couldn&#39;t be sure any single conversion really happened. Croupier uses blind signatures to make conversions unlinkable — each conversion definitely happened (valid signature), but the advertiser can&#39;t link it to a specific user. Certainty about the event, privacy about the person.</p>
+<h2>What Privacy Sandbox Got Right</h2>
+<p>The diagnosis was correct. Third-party cookies are a surveillance tool. Attribution should work without cross-site tracking. Users deserve privacy by default.</p>
+<p>But the prescription — &quot;trust Google&#39;s browser to handle attribution in a way that&#39;s fair to Google&#39;s competitors&quot; — was never viable. Firefox and Safari declined. The EU flagged the antitrust implications. Advertisers questioned why they should trust Google&#39;s black box.</p>
+<p>The right architecture separates the attribution infrastructure from the ad-selling business. The relay that passes coupon books doesn&#39;t sell ads. The advertiser who verifies signatures doesn&#39;t depend on the relay. The browser doesn&#39;t need to understand attribution at all — it just passes a URL parameter.</p>
+<h2>The Open Standard Alternative</h2>
+<p>Privacy Sandbox tried to replace an open web standard (cookies) with a proprietary browser API. It was a closed replacement for an open problem.</p>
+<p>Croupier builds on an actual open standard: Privacy Pass (RFC 9578), ratified by the IETF. The token format is standardized. The blind signature math is standardized. Anyone can implement it.</p>
+<p>If a single company controls the standard, adoption depends on trusting that company. If the standard is open, adoption depends on the math. The math has been proven since 1983.</p>
+<hr>
+<p><em>Croupier is a blind relay for cryptographic coupon books. <a href="https://github.com/kimjune01/croupier">Learn more</a> or <a href="https://croupier.ad">request early access</a>.</em></p>
+
+</div>
+<div class="border-t border-card-border mt-12 pt-8">
+<a href="/blog" class="text-accent-green hover:text-accent-green-hover transition-colors text-sm">&#8592; Back to all posts</a>
+</div>
+</article>
+</body>
+</html>

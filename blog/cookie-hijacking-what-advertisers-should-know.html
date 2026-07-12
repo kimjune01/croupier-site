@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cookie Hijacking: What Advertisers and Publishers Should Know — Croupier</title>
+<meta name="description" content="Honey wasn’t alone. Capital One Shopping and Rakuten did the same thing. The cookie is the vulnerability, not the extension." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://croupier.click/blog/cookie-hijacking-what-advertisers-should-know" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Cookie Hijacking: What Advertisers and Publishers Should Know — Croupier" />
+<meta property="og:description" content="Honey wasn’t alone. Capital One Shopping and Rakuten did the same thing. The cookie is the vulnerability, not the extension." />
+<meta property="og:url" content="https://croupier.click/blog/cookie-hijacking-what-advertisers-should-know" />
+<meta property="og:site_name" content="Croupier" />
+<meta property="og:image" content="https://croupier.click/og-card.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Cookie Hijacking: What Advertisers and Publishers Should Know — Croupier" />
+<meta name="twitter:description" content="Honey wasn’t alone. Capital One Shopping and Rakuten did the same thing. The cookie is the vulnerability, not the extension." />
+<meta name="twitter:image" content="https://croupier.click/og-card.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9824;</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/index-DdRUP43R.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Cookie Hijacking: What Advertisers and Publishers Should Know",
+  "description": "Honey wasn’t alone. Capital One Shopping and Rakuten did the same thing. The cookie is the vulnerability, not the extension.",
+  "datePublished": "2026-02-17",
+  "dateModified": "2026-02-17",
+  "url": "https://croupier.click/blog/cookie-hijacking-what-advertisers-should-know",
+  "mainEntityOfPage": "https://croupier.click/blog/cookie-hijacking-what-advertisers-should-know",
+  "image": "https://croupier.click/og-card.png",
+  "author": {
+    "@type": "Person",
+    "name": "June Kim",
+    "url": "https://june.kim"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Croupier",
+    "url": "https://croupier.click"
+  }
+}
+</script>
+</head>
+<body>
+<nav class="sticky top-0 z-50 bg-bg/80 backdrop-blur-md border-b border-card-border">
+<div class="max-w-3xl mx-auto px-6 h-16 flex items-center gap-4">
+<a href="/blog" class="text-text-muted hover:text-text transition-colors text-sm">&#8592; Blog</a>
+<a href="/" class="font-display text-lg font-bold italic flex items-center gap-2"><span class="text-accent-gold">&#9824;</span> Croupier</a>
+</div>
+</nav>
+<article class="max-w-3xl mx-auto px-6 py-12">
+<div class="mb-8"><time class="text-text-muted/60 font-mono text-sm">February 17, 2026</time></div>
+<div class="prose">
+<h1>Cookie Hijacking: What Advertisers and Publishers Should Know</h1>
+<p><em>March 2026 | Croupier Blog</em></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/vc4yL3YTwWk" frameborder="0" allowfullscreen></iframe>
+
+<p>If you run affiliate marketing campaigns, your attribution data might be lying to you. Not because of measurement error — because someone is actively overwriting it.</p>
+<h2>What Is Cookie Hijacking?</h2>
+<p>Cookie hijacking in advertising happens when a third party overwrites the affiliate tracking cookie right before a purchase. The publisher who drove the customer to your site gets nothing. The hijacker gets the commission.</p>
+<p>This isn&#39;t theoretical. In December 2024, MegaLag exposed how PayPal&#39;s Honey browser extension was doing exactly this — injecting affiliate codes at checkout, redirecting commissions away from the creators and publishers who earned them. Linus Tech Tips ended their Honey sponsorship after discovering it across roughly 160 sponsored segments. A class-action lawsuit followed.</p>
+<p>The mechanic is simple. Cookie-based attribution assigns credit to whoever set the cookie last. A browser extension that activates at checkout will always be last. The publisher who ran the ad, wrote the review, or produced the video gets erased from the attribution chain.</p>
+<h2>Why This Keeps Happening</h2>
+<p>The problem is the cookie itself. It&#39;s a mutable value stored in the browser that any script with the right permissions can read or overwrite. Last-touch attribution means the final write wins.</p>
+<p>This is a structural vulnerability, not a bug in any particular extension. As long as attribution depends on a value that third parties can overwrite, hijacking is a rational economic strategy for anyone positioned at the checkout.</p>
+<p>Here&#39;s what makes it worse: the advertiser often can&#39;t tell. Their dashboard shows conversions attributed to an affiliate partner they never chose. The real partner&#39;s numbers drop, and neither side has proof of what happened.</p>
+<h2>The Scale of the Problem</h2>
+<p>The Honey case got headlines, but cookie hijacking is widespread:</p>
+<ul>
+<li><strong>Browser extensions</strong> with millions of installs can inject affiliate codes silently</li>
+<li><strong>Toolbar software</strong> bundled with downloads has been doing this since the early 2010s</li>
+<li><strong>Malware and adware</strong> swap tracking parameters across ad networks</li>
+<li><strong>Coupon sites</strong> that auto-apply codes at checkout routinely overwrite affiliate cookies</li>
+</ul>
+<p>The advertiser&#39;s conversion report looks fine. Conversions happened. Revenue came in. But the attribution is fiction. The wrong partners get paid, and the right ones leave.</p>
+<h2>What Can Be Done</h2>
+<p>There are a few approaches advertisers and publishers use today:</p>
+<p><strong>Server-side tracking</strong> moves the attribution event off the browser. It&#39;s harder to hijack but still depends on the advertiser&#39;s tracking infrastructure reporting honestly.</p>
+<p><strong>Sub-ID validation</strong> adds extra identifiers to affiliate links. It catches some hijacking but creates an arms race with extensions that learn to replicate the parameters.</p>
+<p><strong>Contractual restrictions</strong> prohibit affiliates from using browser extensions. Enforcement is manual and slow.</p>
+<p>None of these fix the root cause. The attribution signal is still a mutable value that the advertiser doesn&#39;t control.</p>
+<h2>A Different Architecture</h2>
+<p>What if attribution didn&#39;t depend on cookies at all?</p>
+<p>Cryptographic attribution replaces the cookie with a signed token — a coupon issued by the advertiser and carried by the customer&#39;s device. The advertiser signs a batch of tokens and hands them to the publisher. The publisher places one in each ad. At conversion, the customer&#39;s device presents the token and the advertiser verifies the signature.</p>
+<p>No cookie to overwrite. The token is a cryptographic proof that can only be issued by the advertiser and can only be verified by the advertiser. An extension that injects its own code at checkout can&#39;t forge the advertiser&#39;s signature.</p>
+<p>This is the approach behind <a href="https://github.com/kimjune01/croupier">Croupier</a> — a blind relay that passes sealed coupon books between advertisers and publishers without reading them. The relay never sees the tokens. It just moves envelopes.</p>
+<h2>What This Means for Your Campaigns</h2>
+<p>If you&#39;re an advertiser running affiliate or publisher campaigns:</p>
+<ol>
+<li><strong>Audit your attribution chain.</strong> Look for sudden drops in partner performance that coincide with coupon extension installs in your customer base.</li>
+<li><strong>Compare channels.</strong> If one &quot;affiliate&quot; consistently gets last-touch credit but drives no incremental traffic, investigate.</li>
+<li><strong>Consider cryptographic alternatives.</strong> The technology exists today. Privacy Pass (RFC 9578) standardized the token format. Blind signatures have been production-grade since 1983.</li>
+</ol>
+<p>Cookie hijacking is a solvable problem. It just requires moving from a model where anyone can overwrite the receipt to one where only the advertiser can issue it.</p>
+<hr>
+<p><em>Croupier is a blind relay for cryptographic coupon books. <a href="https://github.com/kimjune01/croupier">Learn more</a> or <a href="https://croupier.ad">request early access</a>.</em></p>
+
+</div>
+<div class="border-t border-card-border mt-12 pt-8">
+<a href="/blog" class="text-accent-green hover:text-accent-green-hover transition-colors text-sm">&#8592; Back to all posts</a>
+</div>
+</article>
+</body>
+</html>

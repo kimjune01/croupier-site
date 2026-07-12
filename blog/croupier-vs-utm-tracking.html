@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Croupier vs UTM Tracking: Why Signed Tokens Beat Plain-Text Parameters — Croupier</title>
+<meta name="description" content="UTM parameters are unsigned plain-text strings anyone can forge; Croupier replaces them with cryptographically signed tokens." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://croupier.click/blog/croupier-vs-utm-tracking" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Croupier vs UTM Tracking: Why Signed Tokens Beat Plain-Text Parameters — Croupier" />
+<meta property="og:description" content="UTM parameters are unsigned plain-text strings anyone can forge; Croupier replaces them with cryptographically signed tokens." />
+<meta property="og:url" content="https://croupier.click/blog/croupier-vs-utm-tracking" />
+<meta property="og:site_name" content="Croupier" />
+<meta property="og:image" content="https://croupier.click/og-card.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Croupier vs UTM Tracking: Why Signed Tokens Beat Plain-Text Parameters — Croupier" />
+<meta name="twitter:description" content="UTM parameters are unsigned plain-text strings anyone can forge; Croupier replaces them with cryptographically signed tokens." />
+<meta name="twitter:image" content="https://croupier.click/og-card.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9824;</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/index-DdRUP43R.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Croupier vs UTM Tracking: Why Signed Tokens Beat Plain-Text Parameters",
+  "description": "UTM parameters are unsigned plain-text strings anyone can forge; Croupier replaces them with cryptographically signed tokens.",
+  "datePublished": "2026-02-08",
+  "dateModified": "2026-02-08",
+  "url": "https://croupier.click/blog/croupier-vs-utm-tracking",
+  "mainEntityOfPage": "https://croupier.click/blog/croupier-vs-utm-tracking",
+  "image": "https://croupier.click/og-card.png",
+  "author": {
+    "@type": "Person",
+    "name": "June Kim",
+    "url": "https://june.kim"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Croupier",
+    "url": "https://croupier.click"
+  }
+}
+</script>
+</head>
+<body>
+<nav class="sticky top-0 z-50 bg-bg/80 backdrop-blur-md border-b border-card-border">
+<div class="max-w-3xl mx-auto px-6 h-16 flex items-center gap-4">
+<a href="/blog" class="text-text-muted hover:text-text transition-colors text-sm">&#8592; Blog</a>
+<a href="/" class="font-display text-lg font-bold italic flex items-center gap-2"><span class="text-accent-gold">&#9824;</span> Croupier</a>
+</div>
+</nav>
+<article class="max-w-3xl mx-auto px-6 py-12">
+<div class="mb-8"><time class="text-text-muted/60 font-mono text-sm">February 8, 2026</time></div>
+<div class="prose">
+<h1>Croupier vs UTM Tracking: Why Signed Tokens Beat Plain-Text Parameters</h1>
+<p><em>March 2026 | Croupier Blog</em></p>
+<p>UTM parameters are the most widely used attribution system in digital advertising. Every marketer has appended <code>?utm_source=facebook&amp;utm_medium=cpc&amp;utm_campaign=spring_sale</code> to a URL. Google Analytics reads these parameters and credits the traffic source.</p>
+<p>UTMs are also trivially forgeable. They&#39;re plain-text strings in a URL that anyone can copy, modify, or inject. That&#39;s the problem Croupier solves.</p>
+<h2>How UTM Attribution Works</h2>
+<p>The advertiser appends UTM parameters to their campaign URLs. When someone clicks the link and lands on the site, Google Analytics (or any analytics tool) reads the parameters and associates the session with that traffic source. If the visitor converts, the conversion is attributed to the UTM source.</p>
+<p>There is no verification. No signing. No proof that the UTM parameter was placed by the advertiser or the publisher it claims to represent. The parameter is a label, not a receipt.</p>
+<h2>Where UTMs Break</h2>
+<p><strong>Anyone can write them.</strong> A fraudster can create a link with <code>utm_source=premium_publisher</code> and drive bot traffic through it. The analytics dashboard shows conversions from &quot;premium_publisher.&quot; The advertiser pays for traffic they didn&#39;t ask for and can&#39;t distinguish from real.</p>
+<p><strong>Browser extensions overwrite them.</strong> The Honey scandal showed this at industrial scale. At checkout, Honey replaced affiliate tracking parameters with its own. The creator who drove the sale lost attribution because the last URL parameter wins. UTMs have the same vulnerability.</p>
+<p><strong>They fragment easily.</strong> UTMs are case-sensitive. <code>utm_source=Facebook</code> and <code>utm_source=facebook</code> create two separate traffic sources in your reports. Studies show up to 40% of attribution is lost to poor UTM persistence and inconsistent naming.</p>
+<p><strong>They reveal campaign strategy.</strong> UTMs are visible in the URL bar. Competitors can see your campaign names, source labels, and targeting structure just by clicking your ads.</p>
+<p><strong>They don&#39;t survive ad blockers or consent rejection.</strong> In privacy-conscious markets, 30-50% of traffic is lost when users reject tracking consent. The UTM parameter may arrive, but the analytics tool can&#39;t store it.</p>
+<h2>How Croupier Differs</h2>
+<p>Croupier replaces the UTM with a cryptographically signed token — a coupon that rides in the same position (a URL query parameter) but has fundamentally different properties.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>UTM Parameter</th>
+<th>Croupier Coupon</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Format</td>
+<td>Plain-text string</td>
+<td>Cryptographically signed token</td>
+</tr>
+<tr>
+<td>Issued by</td>
+<td>Anyone (manually typed)</td>
+<td>Advertiser (private key)</td>
+</tr>
+<tr>
+<td>Verified by</td>
+<td>Nobody (read-only label)</td>
+<td>Advertiser (signature check)</td>
+</tr>
+<tr>
+<td>Forgeable</td>
+<td>Yes, trivially</td>
+<td>No (requires private key)</td>
+</tr>
+<tr>
+<td>Overwritable</td>
+<td>Yes (last write wins)</td>
+<td>No (signature is bound to issuer)</td>
+</tr>
+<tr>
+<td>Reveals strategy</td>
+<td>Yes (visible in URL)</td>
+<td>No (opaque blob)</td>
+</tr>
+<tr>
+<td>Proves causation</td>
+<td>No (correlation only)</td>
+<td>Yes (signed proof of issuance)</td>
+</tr>
+</tbody></table>
+<p>The coupon is the same shape as a UTM tag — a query parameter appended to a URL. Publishers embed it the same way. The customer&#39;s click carries it to the conversion page. But at conversion, the advertiser checks the cryptographic signature instead of reading a plain-text label.</p>
+<p>If the signature is valid, the conversion is attributed. If not, it&#39;s discarded. No ambiguity. No fragmentation. No spoofing.</p>
+<h2>What You Keep</h2>
+<p>Switching from UTMs to cryptographic coupons doesn&#39;t mean throwing away your analytics stack. You keep:</p>
+<ul>
+<li><strong>Campaign structure.</strong> The advertiser defines campaigns when issuing coupon books. The books are labeled, not the tokens.</li>
+<li><strong>Channel comparison.</strong> Issue separate coupon books per publisher. Count redemptions per book. Publisher A: 8% conversion. Publisher B: 0.2%.</li>
+<li><strong>Google Analytics.</strong> You can run UTMs alongside coupons during a transition period. Compare platform-reported conversions to coupon-verified conversions. The gap tells you how much your current attribution is inflated.</li>
+</ul>
+<h2>What You Gain</h2>
+<ul>
+<li><strong>Forgery-proof attribution.</strong> A signed token can&#39;t be faked without the advertiser&#39;s private key.</li>
+<li><strong>Hijack resistance.</strong> No browser extension can overwrite a cryptographic signature. The Honey attack vector doesn&#39;t exist.</li>
+<li><strong>Advertiser-controlled measurement.</strong> You count your own redemptions. No platform reports its own performance to you.</li>
+<li><strong>Privacy by design.</strong> The coupon identifies the channel, not the person. The batch is the anonymity set.</li>
+</ul>
+<h2>Getting Started</h2>
+<p>The migration path is straightforward:</p>
+<ol>
+<li><strong>Generate a signing key.</strong> Standard RSA or ECDSA.</li>
+<li><strong>Issue coupon books per campaign.</strong> Deposit them with the <a href="https://github.com/kimjune01/croupier">Croupier relay</a>.</li>
+<li><strong>Publishers pull and embed.</strong> One token per ad impression, appended as a query parameter.</li>
+<li><strong>Add a verification snippet.</strong> A few lines of code at your conversion endpoint that checks the signature.</li>
+<li><strong>Run in parallel.</strong> Keep UTMs active while you build confidence in coupon-verified numbers.</li>
+</ol>
+<p>UTMs were a reasonable solution in 2005 when the web was simpler and tracking wasn&#39;t adversarial. In 2026, they&#39;re a plain-text honor system in an environment full of forgery. The fix is the same shape — a URL parameter — with cryptographic proof behind it.</p>
+<hr>
+<p><em>Croupier is a blind relay for cryptographic coupon books. <a href="https://github.com/kimjune01/croupier">Learn more</a> or <a href="https://croupier.ad">request early access</a>.</em></p>
+
+</div>
+<div class="border-t border-card-border mt-12 pt-8">
+<a href="/blog" class="text-accent-green hover:text-accent-green-hover transition-colors text-sm">&#8592; Back to all posts</a>
+</div>
+</article>
+</body>
+</html>
